@@ -1,4 +1,6 @@
-package elemetaryschoolregistration.domain;
+package com.elementaryschool.model.domain;
+
+import javax.swing.table.DefaultTableModel;
 
 /**
  * 
@@ -13,6 +15,12 @@ public class Grade {
 	/** Grade and Section Name */
 
 	private String gradeSection;
+	
+	
+	
+	
+	public Grade() {}
+	
 
 	/**
 	 * @param gid

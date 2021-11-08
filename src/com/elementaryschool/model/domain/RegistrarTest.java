@@ -1,4 +1,4 @@
-package elemetaryschoolregistration.domain;
+package com.elementaryschool.model.domain;
 
 import static org.junit.Assert.*;
 

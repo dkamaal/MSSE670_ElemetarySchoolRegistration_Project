@@ -1,4 +1,4 @@
-package elemetaryschoolregistration.domain;
+package com.elementaryschool.model.domain;
 
 public class Teacher {
 	/**
@@ -24,6 +24,11 @@ public class Teacher {
 	 */
 
 	private int teacherGrade;
+	
+	
+	public Teacher(){
+		
+	}
 
 	/**
 	 * @param tFirstName

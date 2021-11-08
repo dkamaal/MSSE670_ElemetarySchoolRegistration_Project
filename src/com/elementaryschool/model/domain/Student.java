@@ -1,4 +1,4 @@
-package elemetaryschoolregistration.domain;
+package com.elementaryschool.model.domain;
 
 /**
  * 
@@ -21,7 +21,7 @@ public class Student {
 
 	/** Age of Student */
 
-	private int age;
+	private String age;
 
 	/** email of Student */
 
@@ -32,11 +32,10 @@ public class Student {
 	private String mobile;
 
 	/**
-	 * Grade of Student-Using it for matching with SQL Database, so that
-	 * Object-Relational Mapping Can be done
+	 * Grade of Student-Using it for matching with SQL Database.
 	 */
 
-	private int sgrade;
+	private String sgrade;
 
 	/**
 	 * @param id
@@ -47,8 +46,15 @@ public class Student {
 	 * @param mobile
 	 * @param sgrade
 	 */
-	public Student(int id, String sFirstName, String sLastName, int age, String email, String mobile, int sgrade) {
-//		super();
+	
+	public Student()
+	{
+		// TODO Auto-generated constructor stub
+	}
+	
+	public Student(int id, String sFirstName, String sLastName, String age, String email, String mobile,
+			String sgrade) {
+		super();
 		this.id = id;
 		this.sFirstName = sFirstName;
 		this.sLastName = sLastName;
@@ -103,14 +109,14 @@ public class Student {
 	/**
 	 * @return the age
 	 */
-	public int getAge() {
+	public String getAge() {
 		return age;
 	}
 
 	/**
 	 * @param age the age to set
 	 */
-	public void setAge(int age) {
+	public void setAge(String age) {
 		this.age = age;
 	}
 
@@ -145,14 +151,14 @@ public class Student {
 	/**
 	 * @return the sgrade
 	 */
-	public int getSgrade() {
-		return age;
+	public String getSgrade() {
+		return sgrade;
 	}
 
 	/**
 	 * @param sgrade the sgrade to set
 	 */
-	public void setSgrade(int sgrade) {
+	public void setSgrade(String sgrade) {
 		this.sgrade = sgrade;
 	}
 
@@ -170,16 +176,18 @@ public class Student {
 			return false;
 		if (sLastName == null)
 			return false;
-		if (age <= 0)
+		if (age == null)
 			return false;
 		if (email == null)
 			return false;
 		if (mobile == null)
 			return false;
-		if (sgrade <= 0)
+		if (sgrade == null)
 			return false;
 
 		return true;
 	}
 
+	
 }
+	
