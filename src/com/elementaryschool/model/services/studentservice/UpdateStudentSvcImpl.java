@@ -12,7 +12,7 @@ import javax.swing.JOptionPane;
 import com.elementaryschool.model.domain.Student;
 
 public class UpdateStudentSvcImpl implements UpdateStudentService {
-
+	//Thomas, I. (2013). E-Pedigree Project Code. Anderson College of Business & Computing, Regis University
 	public boolean updateStudent(Student student) {
 
 		boolean isGood = false;
@@ -46,7 +46,7 @@ public class UpdateStudentSvcImpl implements UpdateStudentService {
 			insert.setString(6, student.getSgrade());
 			insert.setInt(7, student.getId());
 			insert.executeUpdate(); // To execure the query
-			JOptionPane.showMessageDialog(null, "Record Saved");
+			JOptionPane.showMessageDialog(null, "Student Record Updated");
 
 		} catch (ClassNotFoundException ex) {
 			Logger.getLogger(Student.class.getName()).log(Level.SEVERE, null, ex);

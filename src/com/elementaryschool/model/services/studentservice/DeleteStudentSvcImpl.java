@@ -15,7 +15,7 @@ public class DeleteStudentSvcImpl implements DeleteStudentService {
 
 	public boolean deleteStudent(Student student) {
 
-		boolean isGood = false;
+		boolean isGood = false; //Thomas, I. (2013). E-Pedigree Project Code. Anderson College of Business & Computing, Regis University
 
 		Student sTU3 = new Student();
 
@@ -43,7 +43,7 @@ public class DeleteStudentSvcImpl implements DeleteStudentService {
 				insert = con3.prepareStatement("DELETE FROM student where id = ?");
 				insert.setInt(1, student.getId());
 				insert.executeUpdate();
-				JOptionPane.showMessageDialog(null, "Record Delete");
+				JOptionPane.showMessageDialog(null, "Student Record Deleted");
 
 			}
 		} catch (ClassNotFoundException ex) {

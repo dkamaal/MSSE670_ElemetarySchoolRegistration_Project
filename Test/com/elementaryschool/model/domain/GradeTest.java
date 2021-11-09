@@ -3,7 +3,10 @@ package com.elementaryschool.model.domain;
 import static org.junit.Assert.*;
 
 import org.junit.jupiter.api.Test;
-
+/**
+ * 
+ * @author Danish Kamaal
+ */
 public class GradeTest {
 
 	/**

@@ -19,7 +19,7 @@ import com.elementaryschool.model.domain.Student;
  * @author Danish Kamaal
  *
  */
-
+//Thomas, I. (2013). E-Pedigree Project Code. Anderson College of Business & Computing, Regis University
 public class RegisterStudentSvcImpl implements RegisterStudentService {
 
 	public boolean registerStudent(Student student) {
