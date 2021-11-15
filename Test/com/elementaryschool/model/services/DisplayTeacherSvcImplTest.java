@@ -9,10 +9,10 @@ import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-
 import org.junit.jupiter.api.Test;
 
-import com.elementaryschool.model.domain.Grade;
+import com.elementaryschool.model.domain.Teacher;
+
 /**
  * 
  * @author Danish Kamaal
@@ -22,7 +22,7 @@ class DisplayTeacherSvcImplTest {
 	@Test
 	void testDisplayTeacher() {
 		System.out.println("Starting testDisplayTeacher()");
-		
+
 		// student table is returned
 
 		String tfirstname = "TestFirstName12";
@@ -30,7 +30,6 @@ class DisplayTeacherSvcImplTest {
 		int teachergrade = 12;
 		int teacherexp = 12;
 
-		
 		Connection con3;
 		PreparedStatement st;
 
@@ -38,7 +37,7 @@ class DisplayTeacherSvcImplTest {
 
 			// register Oracle thin driver with DriverManager service
 
-			//Class.forName("com.mysql.cj.jdbc.Driver");
+			Class.forName("com.mysql.cj.jdbc.Driver");
 
 			// variables
 
@@ -54,7 +53,7 @@ class DisplayTeacherSvcImplTest {
 			ResultSet rs = st.executeQuery();
 
 			while (rs.next()) {
-	
+
 				assertEquals(tfirstname, rs.getString("tfirstname"));
 				assertEquals(tlastname, rs.getString("tlastname"));
 				assertEquals(teachergrade, rs.getInt("teachergrade"));
@@ -65,13 +64,11 @@ class DisplayTeacherSvcImplTest {
 			rs.close();
 			st.close();
 			con3.close();
-		}
-
-		catch (SQLException ex) {
-			Logger.getLogger(Grade.class.getName()).log(Level.SEVERE, null, ex);
+		} catch (ClassNotFoundException ex) {
+			Logger.getLogger(Teacher.class.getName()).log(Level.SEVERE, null, ex);
+		} catch (SQLException ex) {
+			Logger.getLogger(Teacher.class.getName()).log(Level.SEVERE, null, ex);
 		}
 
 	}
-	}
-
-
+}

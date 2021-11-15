@@ -15,11 +15,11 @@ import com.elementaryschool.model.domain.Student;
 
 public class DisplayGradeSvcImpl implements DisplayGradeService {
 
-	public DefaultTableModel displayGrade(Student student) {
+	private DefaultTableModel grademodel;
 
-		DefaultTableModel grademodel = null;
+	public DefaultTableModel displayGrade() {
 
-		Grade gRD1 = new Grade();
+		// Grade gRD1 = new Grade();
 
 		Connection con4;
 		PreparedStatement st;
@@ -46,10 +46,10 @@ public class DisplayGradeSvcImpl implements DisplayGradeService {
 
 			while (rs.next()) {
 
-				String d = rs.getString("gid");
-				String e = rs.getString("gradesection");
+				String a = rs.getString("gid");
+				String b = rs.getString("gradesection");
 
-				model.addRow(new Object[] { d, e });
+				model.addRow(new Object[] { a, b });
 
 				// Below Link was helpful in getting information to have data in to JTable
 				// https://stackoverflow.com/questions/27815400/retrieving-data-from-jdbc-database-into-jtable/43772751

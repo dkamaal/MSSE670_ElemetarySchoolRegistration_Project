@@ -12,33 +12,40 @@ import java.util.logging.Logger;
 
 import org.junit.jupiter.api.Test;
 
-import com.elementaryschool.model.domain.Grade;
 import com.elementaryschool.model.domain.Student;
 import com.elementaryschool.model.services.studentservice.DeleteStudentSvcImpl;
+
 /**
  * 
  * @author Danish Kamaal
  */
 //This test is to delete student from table
 
-class DeleteStudentSvcImplTest {
+public class DeleteStudentSvcImplTest {
+	
+	int id = 1;
+	String sfirstname = "Bob";
+	String slastname = "Williams";
+	String age = "5";
+	String email = "Bob@test.com";
+	String mobile = "1234567890";
+	String sgrade = "SECOND-A";
 
 	@Test
 	void testDeleteStudent() {
-System.out.println("Starting testDeleteStudentValidate()");
-		
+		System.out.println("Starting testDeleteStudentValidate()");
 
 		Student sTU1 = new Student();
 
 		// Setting Input parameters
-		
+
 		sTU1.setsFirstName("Bob");
 		sTU1.setsLastName("Williams");
 		sTU1.setAge("5");
 		sTU1.setEmail("Bob@test.com");
 		sTU1.setMobile("1234567890");
 		sTU1.setSgrade("SECOND-A");
-		sTU1.setId(3); //**Update ID based on student Table Data**
+		sTU1.setId(1); // **Update ID based on student Table Data**
 
 		// Do the call
 
@@ -52,7 +59,7 @@ System.out.println("Starting testDeleteStudentValidate()");
 
 			// register Oracle thin driver with DriverManager service
 
-			//Class.forName("com.mysql.cj.jdbc.Driver");
+			Class.forName("com.mysql.cj.jdbc.Driver");
 
 			// variables
 
@@ -64,28 +71,29 @@ System.out.println("Starting testDeleteStudentValidate()");
 
 			con3 = DriverManager.getConnection(url, user, password);
 
-			st = con3.prepareStatement("SELECT * FROM student where sfirstname = 'Bob'"); //update id here for completing test
+			st = con3.prepareStatement("SELECT * FROM student where sfirstname = 'Bob'"); // update id here for
+																							// completing test
 			ResultSet rs = st.executeQuery();
 
 			while (rs.next()) {
-				
-				
-				assertFalse(rs.next(), "Record Still Exist");
-				
-	
+				assertNotEquals(sfirstname, rs.getString("sfirstname"));
+
+				//assertFalse(rs.next(), "Record Still Exist");
+
 			}
-			
-				
+
 			rs.close();
 			st.close();
 			con3.close();
+		} catch (ClassNotFoundException ex) {
+			Logger.getLogger(Student.class.getName()).log(Level.SEVERE, null, ex);
+		} catch (SQLException ex) {
+			Logger.getLogger(Student.class.getName()).log(Level.SEVERE, null, ex);
 		}
-		
-		
-
-		catch (SQLException ex) {
-			Logger.getLogger(Grade.class.getName()).log(Level.SEVERE, null, ex);
-		}
+		 catch (Exception e) {
+			 System.out.println("Something Went Wrong");
+		 }
+		System.out.println("DeleteStudentSvcImplTest Passed");
 	}
 
 }

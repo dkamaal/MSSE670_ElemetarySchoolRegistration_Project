@@ -22,15 +22,14 @@ import com.elementaryschool.model.domain.Grade;
 class DisplayGradeSvcImplTest {
 
 	@Test
-	void testDisplayGrade() throws ClassNotFoundException {
+	void testDisplayGrade() {
 		System.out.println("Starting testDisplayGrade()");
-		
+
 		// Grade table is returned
 
 		int gid = 7;
 		String gradesection = "THIRD-A";
 
-		
 		Connection con3;
 		PreparedStatement st;
 
@@ -54,7 +53,7 @@ class DisplayGradeSvcImplTest {
 			ResultSet rs = st.executeQuery();
 
 			while (rs.next()) {
-	
+
 				assertEquals(gid, rs.getInt(1));
 				assertEquals(gradesection, rs.getString("gradesection"));
 
@@ -63,13 +62,11 @@ class DisplayGradeSvcImplTest {
 			rs.close();
 			st.close();
 			con3.close();
-		}
-
-		catch (SQLException ex) {
+		} catch (ClassNotFoundException ex) {
+			Logger.getLogger(Grade.class.getName()).log(Level.SEVERE, null, ex);
+		} catch (SQLException ex) {
 			Logger.getLogger(Grade.class.getName()).log(Level.SEVERE, null, ex);
 		}
 
 	}
-	}
-
-
+}

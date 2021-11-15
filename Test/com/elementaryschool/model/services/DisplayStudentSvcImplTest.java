@@ -13,18 +13,18 @@ import java.util.logging.Logger;
 import org.junit.jupiter.api.Test;
 
 import com.elementaryschool.model.domain.Grade;
+import com.elementaryschool.model.domain.Student;
+
 /**
  * 
  * @author Danish Kamaal
  */
-class DisplayStudentSvcImplTest {
+public class DisplayStudentSvcImplTest {
 
 	@Test
-	void testDisplayStudent() throws ClassNotFoundException {
+	void testDisplayStudent() {
 
 		System.out.println("Starting testDisplayStudent()");
-				
-		// student table is returned
 
 		String sfirstname = "Bob";
 		String slastname = "Williams";
@@ -32,7 +32,7 @@ class DisplayStudentSvcImplTest {
 		String email = "Bob@test.com";
 		String mobile = "1234567890";
 		String sgrade = "SECOND-A";
-		
+
 		Connection con3;
 		PreparedStatement st;
 
@@ -56,7 +56,7 @@ class DisplayStudentSvcImplTest {
 			ResultSet rs = st.executeQuery();
 
 			while (rs.next()) {
-	
+
 				assertEquals(sfirstname, rs.getString("sfirstname"));
 				assertEquals(slastname, rs.getString("slastname"));
 				assertEquals(age, rs.getString("age"));
@@ -68,14 +68,12 @@ class DisplayStudentSvcImplTest {
 			rs.close();
 			st.close();
 			con3.close();
-		}
-
-		catch (SQLException ex) {
+		} catch (ClassNotFoundException ex) {
+			Logger.getLogger(Student.class.getName()).log(Level.SEVERE, null, ex);
+		} catch (SQLException ex) {
 			Logger.getLogger(Grade.class.getName()).log(Level.SEVERE, null, ex);
 		}
 
 	}
 
-	}
-
-
+}

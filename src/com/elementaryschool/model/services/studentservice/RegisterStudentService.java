@@ -19,5 +19,7 @@ import com.elementaryschool.model.services.SchoolService;
 
 public interface RegisterStudentService extends SchoolService {
 	
+	public final String NAME = "RegisterStudentService";
+	
 	public boolean registerStudent(Student student);
 }

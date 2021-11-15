@@ -21,6 +21,8 @@ import com.elementaryschool.model.services.SchoolService;
 
 public interface DisplayGradeService extends SchoolService {
 	
-	public DefaultTableModel displayGrade(Student student);
+	public final String NAME = "DisplayGradeService";
+	
+	public DefaultTableModel displayGrade();
 
 }

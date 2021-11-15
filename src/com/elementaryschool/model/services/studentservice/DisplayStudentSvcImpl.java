@@ -14,13 +14,14 @@ import com.elementaryschool.model.domain.Grade;
 import com.elementaryschool.model.domain.Student;
 
 public class DisplayStudentSvcImpl implements DisplayStudentService {
-
-
-	public DefaultTableModel displayStudent(Student student) {
 	
-		DefaultTableModel studentmodel = null;
+	private DefaultTableModel studentmodel;
 
-		Student sTU4 = new Student();
+	public DefaultTableModel displayStudent() {
+
+		
+
+	//	Student sTU4 = new Student();
 
 		Connection con5;
 		PreparedStatement st;
@@ -39,8 +40,8 @@ public class DisplayStudentSvcImpl implements DisplayStudentService {
 			// establish the connection
 			con5 = DriverManager.getConnection(url, user, password);
 
-			DefaultTableModel model = new DefaultTableModel(
-					new String[] { "REGISTRATION ID", "STUDENT FIRST NAME", "STUDENT LAST NAME", "AGE", "EMAIL", "MOBILE", "STUDENT GRADE" }, 0);
+			DefaultTableModel model = new DefaultTableModel(new String[] { "REGISTRATION ID", "STUDENT FIRST NAME",
+					"STUDENT LAST NAME", "AGE", "EMAIL", "MOBILE", "STUDENT GRADE" }, 0);
 
 			st = con5.prepareStatement("SELECT * FROM student");
 
@@ -48,16 +49,14 @@ public class DisplayStudentSvcImpl implements DisplayStudentService {
 
 			while (rs.next()) {
 
-				String j = rs.getString("id");
+				int j = rs.getInt("id");
 				String d = rs.getString("sfirstname");
 				String e = rs.getString("slastname");
 				String f = rs.getString("age");
 				String g = rs.getString("email");
 				String h = rs.getString("mobile");
 				String i = rs.getString("sgrade");
-	model.addRow(new Object[] { j, d, e, f, g, h, i });
-
-
+				model.addRow(new Object[] { j, d, e, f, g, h, i });
 
 				// Below Link was helpful in getting information to have data in to JTable
 				// https://stackoverflow.com/questions/27815400/retrieving-data-from-jdbc-database-into-jtable/43772751
@@ -67,9 +66,9 @@ public class DisplayStudentSvcImpl implements DisplayStudentService {
 			return model;
 
 		} catch (ClassNotFoundException ex) {
-			Logger.getLogger(Grade.class.getName()).log(Level.SEVERE, null, ex);
+			Logger.getLogger(Student.class.getName()).log(Level.SEVERE, null, ex);
 		} catch (SQLException ex) {
-			Logger.getLogger(Grade.class.getName()).log(Level.SEVERE, null, ex);
+			Logger.getLogger(Student.class.getName()).log(Level.SEVERE, null, ex);
 		}
 		return studentmodel; // All Rows of Data is returned to JTable
 	}
