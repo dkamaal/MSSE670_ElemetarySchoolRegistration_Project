@@ -1,10 +1,14 @@
 package com.elementaryschool.model.services.teacherservice;
 
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.Properties;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -27,20 +31,21 @@ public class DisplayTeacherSvcImpl implements DisplayTeacherService {
 
 		try {
 
-			// register Oracle thin driver with DriverManager service
-
-			Class.forName("com.mysql.cj.jdbc.Driver");
-
-			// variables
-			final String url = "jdbc:mysql:///school";
-			final String user = "root";
-			final String password = "Root4you$";
-
+			// Load the Properties File
+			
+			Properties dbprops = new Properties();
+            dbprops.load(new FileInputStream("C:/Users/danishkamaal2011/eclipse-workspace/MSSE670_ElemetarySchoolRegistration_Project/config/database.properties"));
+            
+            // Read the dbprops
+            
+            String user = dbprops.getProperty("username");
+            String password = dbprops.getProperty("password");
+            String url = dbprops.getProperty("databaseurl");
 			// establish the connection
 			con4 = DriverManager.getConnection(url, user, password);
 
 			DefaultTableModel model = new DefaultTableModel(
-					new String[] { "TEACHER FIRST NAME", "TEACHER LAST NAME", "GRADE ID", "TEACHING EXP" },
+					new String[] {"GRADE ID", "TEACHER FIRST NAME", "TEACHER LAST NAME", "TEACHING EXP" },
 					0);
 
 			st = con4.prepareStatement("SELECT * FROM teacher");
@@ -54,7 +59,7 @@ public class DisplayTeacherSvcImpl implements DisplayTeacherService {
 				String c = rs.getString("teachergrade");
 				String d = rs.getString("teacherexp");
 
-				model.addRow(new Object[] { a, b, c, d });
+				model.addRow(new Object[] { c, a, b, d });
 				// Below Link was helpful in getting information to have data in to JTable
 				// https://stackoverflow.com/questions/27815400/retrieving-data-from-jdbc-database-into-jtable/43772751
 
@@ -62,10 +67,14 @@ public class DisplayTeacherSvcImpl implements DisplayTeacherService {
 
 			return model;
 
-		} catch (ClassNotFoundException ex) {
-			Logger.getLogger(Teacher.class.getName()).log(Level.SEVERE, null, ex);
 		} catch (SQLException ex) {
 			Logger.getLogger(Teacher.class.getName()).log(Level.SEVERE, null, ex);
+		} catch (FileNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 		}
 		return teachermodel; // All Rows of Data is returned to JTable
 

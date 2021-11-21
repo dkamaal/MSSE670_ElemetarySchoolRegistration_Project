@@ -2,11 +2,13 @@ package com.elementaryschool.model.services;
 
 import static org.junit.jupiter.api.Assertions.*;
 
+import java.io.FileInputStream;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.Properties;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -57,16 +59,17 @@ public class DeleteStudentSvcImplTest {
 
 		try {
 
-			// register Oracle thin driver with DriverManager service
-
-			Class.forName("com.mysql.cj.jdbc.Driver");
-
-			// variables
-
-			final String url = "jdbc:mysql:///school";
-			final String user = "root";
-			final String password = "Root4you$";
-
+			// Load the Properties File
+			
+			Properties dbprops = new Properties();
+            dbprops.load(new FileInputStream("C:/Users/danishkamaal2011/eclipse-workspace/MSSE670_ElemetarySchoolRegistration_Project/config/database.properties"));
+            
+            // Read the dbprops
+            
+            String user = dbprops.getProperty("username");
+            String password = dbprops.getProperty("password");
+            String url = dbprops.getProperty("databaseurl");
+			
 			// establish the connection
 
 			con3 = DriverManager.getConnection(url, user, password);
@@ -85,8 +88,7 @@ public class DeleteStudentSvcImplTest {
 			rs.close();
 			st.close();
 			con3.close();
-		} catch (ClassNotFoundException ex) {
-			Logger.getLogger(Student.class.getName()).log(Level.SEVERE, null, ex);
+
 		} catch (SQLException ex) {
 			Logger.getLogger(Student.class.getName()).log(Level.SEVERE, null, ex);
 		}

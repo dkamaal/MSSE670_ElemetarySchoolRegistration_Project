@@ -1,9 +1,14 @@
 package com.elementaryschool.model.services.studentservice;
 
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.Properties;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -33,20 +38,30 @@ public class RegisterStudentSvcImpl implements RegisterStudentService {
 
 		try {
 
-			// register Oracle thin driver with DriverManager service
-
-			Class.forName("com.mysql.cj.jdbc.Driver");
-
-			// variables
-
-			final String url = "jdbc:mysql:///school";
-			final String user = "root";
-			final String password = "Root4you$";
+			// Load the Properties File
+			
+			Properties dbprops = new Properties();
+            dbprops.load(new FileInputStream("C:/Users/danishkamaal2011/eclipse-workspace/MSSE670_ElemetarySchoolRegistration_Project/config/database.properties"));
+            
+            // Read the dbprops
+            
+            String user = dbprops.getProperty("username");
+            String password = dbprops.getProperty("password");
+            String url = dbprops.getProperty("databaseurl");
 
 			// establish the connection
 
 			con1 = DriverManager.getConnection(url, user, password);
+			
+			// Check if Record Already Exist in Database
+			
+			insert = con1.prepareStatement("SELECT * FROM student WHERE sfirstname = ? AND slastname = ?");
+			insert.setString(1, student.getsFirstName());
+			insert.setString(2, student.getsLastName());
 
+			ResultSet rs = insert.executeQuery();
+			
+			if (!rs.isBeforeFirst()) {  //isBeforeFirst() will return true if the cursor is before the first row
 			insert = con1.prepareStatement(
 					"insert into student (sfirstname,slastname,age,email,mobile,sgrade)values(?,?,?,?,?,?)");
 			insert.setString(1, student.getsFirstName());
@@ -57,11 +72,22 @@ public class RegisterStudentSvcImpl implements RegisterStudentService {
 			insert.setString(6, student.getSgrade());
 			insert.executeUpdate(); // To execure the query
 			JOptionPane.showMessageDialog(null, "Student Record Saved");
-
-		} catch (ClassNotFoundException ex) {
-			Logger.getLogger(Student.class.getName()).log(Level.SEVERE, null, ex);  
+			}
+			
+			else
+			{
+				JOptionPane.showMessageDialog(null, "Student Registration Record Exist with Same First Name and Last Name");
+			}
+			
+ 
 		} catch (SQLException ex) {
 			Logger.getLogger(Student.class.getName()).log(Level.SEVERE, null, ex);
+		} catch (FileNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 		}
 
 		return isRegisterStudent;

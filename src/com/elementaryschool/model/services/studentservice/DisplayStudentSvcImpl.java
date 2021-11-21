@@ -1,10 +1,14 @@
 package com.elementaryschool.model.services.studentservice;
 
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.Properties;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -28,14 +32,16 @@ public class DisplayStudentSvcImpl implements DisplayStudentService {
 
 		try {
 
-			// register Oracle thin driver with DriverManager service
-
-			Class.forName("com.mysql.cj.jdbc.Driver");
-
-			// variables
-			final String url = "jdbc:mysql:///school";
-			final String user = "root";
-			final String password = "Root4you$";
+			// Load the Properties File
+			
+			Properties dbprops = new Properties();
+            dbprops.load(new FileInputStream("C:/Users/danishkamaal2011/eclipse-workspace/MSSE670_ElemetarySchoolRegistration_Project/config/database.properties"));
+            
+            // Read the dbprops
+            
+            String user = dbprops.getProperty("username");
+            String password = dbprops.getProperty("password");
+            String url = dbprops.getProperty("databaseurl");
 
 			// establish the connection
 			con5 = DriverManager.getConnection(url, user, password);
@@ -65,10 +71,14 @@ public class DisplayStudentSvcImpl implements DisplayStudentService {
 
 			return model;
 
-		} catch (ClassNotFoundException ex) {
-			Logger.getLogger(Student.class.getName()).log(Level.SEVERE, null, ex);
 		} catch (SQLException ex) {
 			Logger.getLogger(Student.class.getName()).log(Level.SEVERE, null, ex);
+		} catch (FileNotFoundException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		} catch (IOException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
 		}
 		return studentmodel; // All Rows of Data is returned to JTable
 	}

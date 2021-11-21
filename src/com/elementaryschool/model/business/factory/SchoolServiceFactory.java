@@ -1,7 +1,5 @@
 package com.elementaryschool.model.business.factory;
 
-import java.io.File;
-
 import com.elementaryschool.model.business.exceptions.ServiceLoadException;
 import com.elementaryschool.model.services.SchoolService;
 

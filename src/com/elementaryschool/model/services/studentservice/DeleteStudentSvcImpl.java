@@ -1,9 +1,13 @@
 package com.elementaryschool.model.services.studentservice;
 
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
+import java.util.Properties;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -29,12 +33,16 @@ public class DeleteStudentSvcImpl implements DeleteStudentService {
 					JOptionPane.YES_NO_OPTION);
 			if (dialogResult == JOptionPane.YES_OPTION) {
 
-				Class.forName("com.mysql.cj.jdbc.Driver");
-
-				// variables
-				final String url = "jdbc:mysql:///school";
-				final String user = "root";
-				final String password = "Root4you$";
+				// Load the Properties File
+				
+				Properties dbprops = new Properties();
+	            dbprops.load(new FileInputStream("C:/Users/danishkamaal2011/eclipse-workspace/MSSE670_ElemetarySchoolRegistration_Project/config/database.properties"));
+	            
+	            // Read the dbprops
+	            
+	            String user = dbprops.getProperty("username");
+	            String password = dbprops.getProperty("password");
+	            String url = dbprops.getProperty("databaseurl");
 
 				// establish the connection
 				con3 = DriverManager.getConnection(url, user, password);
@@ -44,10 +52,15 @@ public class DeleteStudentSvcImpl implements DeleteStudentService {
 				JOptionPane.showMessageDialog(null, "Student Record Deleted");
 			}
 
-		} catch (ClassNotFoundException ex) {
-			Logger.getLogger(Student.class.getName()).log(Level.SEVERE, null, ex);
+
 		} catch (SQLException ex) {
 			Logger.getLogger(Student.class.getName()).log(Level.SEVERE, null, ex);
+		} catch (FileNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 		}
 
 		return isDeleteStudent;
