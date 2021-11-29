@@ -98,3 +98,7 @@ INSERT INTO teacher (tfirstname, tlastname, teachergrade, teacherexp) VALUES('Te
 Thomas, I. (2013). E-Pedigree Design Document. Anderson College of Business & Computing, Regis University
 
 Thomas, I. (2013). E-Pedigree Project Code. Anderson College of Business & Computing, Regis University
+
+Edureka (2018). MySQL Workbench Tutorial . Retrieved from https://www.youtube.com/watch?v=uKwR9fWsZJ4
+
+Java Guides (2020). Java Swing Registration Form with MySQL Database in Eclipse. Retrieved from https://www.youtube.com/watch?v=Gwwfetb5CJs

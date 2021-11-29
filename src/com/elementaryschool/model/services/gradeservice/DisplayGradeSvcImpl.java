@@ -15,7 +15,6 @@ import java.util.logging.Logger;
 import javax.swing.table.DefaultTableModel;
 
 import com.elementaryschool.model.domain.Grade;
-import com.elementaryschool.model.domain.Student;
 
 public class DisplayGradeSvcImpl implements DisplayGradeService {
 

@@ -17,7 +17,6 @@ import java.util.logging.Logger;
 import org.junit.jupiter.api.Test;
 
 import com.elementaryschool.model.domain.Grade;
-import com.elementaryschool.model.domain.Student;
 
 /**
  * 

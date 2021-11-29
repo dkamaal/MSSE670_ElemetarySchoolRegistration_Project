@@ -1,5 +1,8 @@
 package com.elementaryschool.view;
 
+
+
+
 import com.elementaryschool.model.business.exceptions.ServiceLoadException;
 
 import java.awt.EventQueue;
@@ -20,11 +23,16 @@ import com.elementaryschool.model.business.managers.RegisterStudentManager;
 import com.elementaryschool.model.business.managers.UpdateStudentManager;
 import javax.swing.border.EtchedBorder;
 import java.awt.event.ActionListener;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.ActionEvent;
 
 import com.elementaryschool.model.domain.Student;
+
+
+
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
@@ -121,21 +129,21 @@ public class StudentJFrame extends JFrame {
 
 		frame = new JFrame();
 		frame.getContentPane().setFont(new Font("Tahoma", Font.PLAIN, 14));
-		frame.setBounds(100, 100, 1343, 954);
+		frame.setBounds(100, 100, 1401, 954);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.getContentPane().setLayout(null);
 
 		// Elementary School Registration Label
 
 		JLabel lblNewLabel = new JLabel("Elementary School Registration");
-		lblNewLabel.setFont(new Font("Tahoma", Font.PLAIN, 24));
-		lblNewLabel.setBounds(536, 10, 331, 46);
+		lblNewLabel.setFont(new Font("Tahoma", Font.BOLD, 24));
+		lblNewLabel.setBounds(498, 10, 422, 29);
 		frame.getContentPane().add(lblNewLabel);
 
 		// Student Registration Form Panel
 		JPanel panel = new JPanel();
 		panel.setBorder(new EtchedBorder(EtchedBorder.LOWERED, null, null));
-		panel.setBounds(26, 89, 405, 395);
+		panel.setBounds(26, 89, 471, 395);
 		frame.getContentPane().add(panel);
 		panel.setLayout(null);
 
@@ -185,6 +193,20 @@ public class StudentJFrame extends JFrame {
 		txtslastname.setColumns(10);
 
 		txtage = new JTextField();
+		// To accept only Max of 2 Digits in Age Text Field
+		txtage.setDocument(new TextFieldLimit(2));
+		// To accept only Digits in Age Field
+		txtage.addKeyListener(new KeyAdapter() {
+			@Override
+			public void keyTyped(KeyEvent evtage) { 
+				
+				char d = evtage.getKeyChar();
+				if(!Character.isDigit(d)) {
+					evtage.consume();
+				}
+			}
+		});
+		txtage.setToolTipText("Age Must Be maximum of 2 Digits");
 		txtage.setBounds(147, 137, 201, 19);
 		panel.add(txtage);
 		txtage.setColumns(10);
@@ -195,6 +217,19 @@ public class StudentJFrame extends JFrame {
 		txtemail.setColumns(10);
 
 		txtmobile = new JTextField();
+		// To accept only Max of 10 Digits in Mobile Text Field
+		txtmobile.setDocument(new TextFieldLimit(10));
+		// To accept only Digits in Mobile Field
+		txtmobile.addKeyListener(new KeyAdapter() {
+			@Override
+			public void keyTyped(KeyEvent evtmobile) { 
+				
+				char e = evtmobile.getKeyChar();
+				if(!Character.isDigit(e)) {
+					evtmobile.consume();
+				}
+			}
+		});
 		txtmobile.setToolTipText("Mobile Number must be 10 Digits");
 		txtmobile.setBounds(147, 237, 201, 19);
 		panel.add(txtmobile);
@@ -217,18 +252,23 @@ public class StudentJFrame extends JFrame {
 		updateButton.setToolTipText("Select Student Application from Student Registration Table");
 
 		updateButton.setFont(new Font("Tahoma", Font.PLAIN, 18));
-		updateButton.setBounds(147, 352, 104, 21);
+		updateButton.setBounds(134, 352, 104, 21);
 		panel.add(updateButton);
 
 		JButton deleteButton = new JButton("DELETE");
 		deleteButton.setFont(new Font("Tahoma", Font.PLAIN, 18));
-		deleteButton.setBounds(286, 352, 109, 21);
+		deleteButton.setBounds(244, 352, 104, 21);
 		panel.add(deleteButton);
+		
+		JButton clearButton = new JButton("CLEAR");
+		clearButton.setFont(new Font("Tahoma", Font.PLAIN, 18));
+		clearButton.setBounds(358, 352, 103, 21);
+		panel.add(clearButton);
 
 		// Student Application Table
 
 		JScrollPane scrollPane = new JScrollPane();
-		scrollPane.setBounds(26, 537, 1278, 359);
+		scrollPane.setBounds(26, 537, 1339, 359);
 		frame.getContentPane().add(scrollPane);
 		table = new JTable();
 		scrollPane.setViewportView(table);
@@ -236,7 +276,7 @@ public class StudentJFrame extends JFrame {
 		// Grade Table
 
 		JScrollPane scrollPaneGrade = new JScrollPane();
-		scrollPaneGrade.setBounds(441, 89, 288, 395);
+		scrollPaneGrade.setBounds(507, 89, 265, 395);
 		frame.getContentPane().add(scrollPaneGrade);
 		gradetable = new JTable();
 		scrollPaneGrade.setViewportView(gradetable);
@@ -244,10 +284,30 @@ public class StudentJFrame extends JFrame {
 		// Teacher Table
 
 		JScrollPane scrollPaneTeacher = new JScrollPane();
-		scrollPaneTeacher.setBounds(739, 89, 553, 395);
+		scrollPaneTeacher.setBounds(785, 89, 580, 395);
 		frame.getContentPane().add(scrollPaneTeacher);
 		teachertable = new JTable();
 		scrollPaneTeacher.setViewportView(teachertable);
+		
+		JLabel registrationFormLabel = new JLabel("Registration Form");
+		registrationFormLabel.setFont(new Font("Tahoma", Font.ITALIC, 16));
+		registrationFormLabel.setBounds(188, 59, 144, 20);
+		frame.getContentPane().add(registrationFormLabel);
+		
+		JLabel gradeTableLabel = new JLabel("Grade Table");
+		gradeTableLabel.setFont(new Font("Tahoma", Font.ITALIC, 16));
+		gradeTableLabel.setBounds(582, 59, 118, 20);
+		frame.getContentPane().add(gradeTableLabel);
+		
+		JLabel teacherTableLabel = new JLabel("Teacher's Table");
+		teacherTableLabel.setFont(new Font("Tahoma", Font.ITALIC, 16));
+		teacherTableLabel.setBounds(975, 59, 137, 20);
+		frame.getContentPane().add(teacherTableLabel);
+		
+		JLabel lblNewLabel_1 = new JLabel("Student Registration Table");
+		lblNewLabel_1.setFont(new Font("Tahoma", Font.ITALIC, 16));
+		lblNewLabel_1.setBounds(608, 505, 207, 22);
+		frame.getContentPane().add(lblNewLabel_1);
 
 		// Register Button ActionListener
 
@@ -298,11 +358,13 @@ public class StudentJFrame extends JFrame {
 
 		updateButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				
 
+				
 				DefaultTableModel model1 = (DefaultTableModel) table.getModel();
 
 				int selectedIndex = table.getSelectedRow();
-
+				
 				if (txtsfirstname.getText().isEmpty() || txtslastname.getText().isEmpty() || txtage.getText().isEmpty()
 						|| txtemail.getText().isEmpty() || txtmobile.getText().isEmpty()
 						|| txtsgrade.getText().isEmpty()) {
@@ -310,47 +372,48 @@ public class StudentJFrame extends JFrame {
 																					// data for registration
 
 				}
-
-				// Checking if user selected student registration from Student Registration
-				// Table for Update
+				
+				// Checking if user selected student registration from Student Registration Table for Update
 				else if (selectedIndex < 0) {
-					JOptionPane.showMessageDialog(null,
-							"Please Select Student Registration from Student Registration Table");
+					JOptionPane.showMessageDialog(null, "Please Select Student Registration from Student Registration Table");
 				}
-
+				
 				else {
 
-					int id = Integer.parseInt(model1.getValueAt(selectedIndex, 0).toString());
+				int id = Integer.parseInt(model1.getValueAt(selectedIndex, 0).toString());
+				
+				
 
-					Student sTU2 = new Student(id, txtsfirstname.getText(), txtslastname.getText(), txtage.getText(),
-							txtemail.getText(), txtmobile.getText(), txtsgrade.getText());
 
-					UpdateStudentManager updMgr = new UpdateStudentManager();
+				Student sTU2 = new Student(id, txtsfirstname.getText(), txtslastname.getText(), txtage.getText(),
+						txtemail.getText(), txtmobile.getText(), txtsgrade.getText());
 
-					try {
-						updMgr.updateNewStudent(sTU2);
-					} catch (ServiceLoadException e1) {
-						e1.printStackTrace();
-					}
+				UpdateStudentManager updMgr = new UpdateStudentManager();
 
-					finally {
-						// Text Boxes are cleared
+				try {
+					updMgr.updateNewStudent(sTU2);
+				} catch (ServiceLoadException e1) {
+					e1.printStackTrace();
+				}
 
-						txtsfirstname.setText("");
-						txtslastname.setText("");
-						txtage.setText("");
-						txtemail.setText("");
-						txtmobile.setText("");
-						txtsgrade.setText("");
+				finally {
+					// Text Boxes are cleared
 
-						// Focus comes back to Student First Name
+					txtsfirstname.setText("");
+					txtslastname.setText("");
+					txtage.setText("");
+					txtemail.setText("");
+					txtmobile.setText("");
+					txtsgrade.setText("");
 
-						txtsfirstname.requestFocus();
+					// Focus comes back to Student First Name
 
-						// Updating Student Table after updating Student Registration record
+					txtsfirstname.requestFocus();
 
-						StudentRegistrationTableDisplay();
-					}
+					// Updating Student Table after updating Student Registration record
+
+					StudentRegistrationTableDisplay();
+				}
 				}
 			}
 		});
@@ -361,34 +424,37 @@ public class StudentJFrame extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 
 				try {
-					DefaultTableModel model1 = (DefaultTableModel) table.getModel();
+				DefaultTableModel model1 = (DefaultTableModel) table.getModel();
 
-					int selectedIndex = table.getSelectedRow();
-
-					// Checking below if user selected Student Record to Delete it
-
-					if (selectedIndex < 0) {
-						JOptionPane.showMessageDialog(null,
-								"Please Select Student Registration from Student Registration Table");
-					}
-
-					else {
-						int id = Integer.parseInt(model1.getValueAt(selectedIndex, 0).toString());
-
-						Student sTU2 = new Student(id, txtsfirstname.getText(), txtslastname.getText(),
-								txtage.getText(), txtemail.getText(), txtmobile.getText(), txtsgrade.getText());
-
-						DeleteStudentManager delMgr = new DeleteStudentManager();
-
-						delMgr.deleteNewStudent(sTU2);
-					}
-
+				int selectedIndex = table.getSelectedRow();
+				
+				
+				//Checking below if user selected Student Record to Delete it
+				
+				if (selectedIndex < 0) {
+					JOptionPane.showMessageDialog(null, "Please Select Student Registration from Student Registration Table");
 				}
 
+				
+				else {
+				int id = Integer.parseInt(model1.getValueAt(selectedIndex, 0).toString());
+
+				Student sTU2 = new Student(id, txtsfirstname.getText(), txtslastname.getText(), txtage.getText(),
+						txtemail.getText(), txtmobile.getText(), txtsgrade.getText());
+
+				DeleteStudentManager delMgr = new DeleteStudentManager();
+
+				
+					delMgr.deleteNewStudent(sTU2);
+				} 
+				
+				}
+				
+				
 				catch (ServiceLoadException e1) {
 					e1.printStackTrace();
 				}
-
+				
 				catch (Exception e1) {
 					System.out.println("Something Went Wrong");
 				}
@@ -411,7 +477,26 @@ public class StudentJFrame extends JFrame {
 
 					StudentRegistrationTableDisplay();
 				}
+				
+			}
+		});
+		
+		//Clear Button Text Fields Action Listener
+		
+		clearButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				// Text Boxes are cleared
 
+				txtsfirstname.setText("");
+				txtslastname.setText("");
+				txtage.setText("");
+				txtemail.setText("");
+				txtmobile.setText("");
+				txtsgrade.setText("");
+
+				// Focus comes back to Student First Name
+
+				txtsfirstname.requestFocus();
 			}
 		});
 

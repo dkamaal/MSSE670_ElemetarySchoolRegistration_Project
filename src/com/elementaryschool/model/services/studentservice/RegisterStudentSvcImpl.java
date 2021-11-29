@@ -31,7 +31,7 @@ public class RegisterStudentSvcImpl implements RegisterStudentService {
 
 		boolean isRegisterStudent = false;
 
-		Student sTU1 = new Student();
+
 
 		Connection con1;
 		PreparedStatement insert;

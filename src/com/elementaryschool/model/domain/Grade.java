@@ -1,7 +1,5 @@
 package com.elementaryschool.model.domain;
 
-import javax.swing.table.DefaultTableModel;
-
 /**
  * 
  * @author Danish Kamaal

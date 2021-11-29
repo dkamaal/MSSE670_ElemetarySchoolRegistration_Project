@@ -22,7 +22,7 @@ public class UpdateStudentSvcImpl implements UpdateStudentService {
 
 		boolean isUpdateStudent = false;
 
-		Student sTU2 = new Student();
+
 
 		Connection con2;
 		PreparedStatement insert;

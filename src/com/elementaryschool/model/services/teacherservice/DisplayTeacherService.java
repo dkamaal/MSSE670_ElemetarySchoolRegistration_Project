@@ -2,7 +2,6 @@ package com.elementaryschool.model.services.teacherservice;
 
 import javax.swing.table.DefaultTableModel;
 
-import com.elementaryschool.model.domain.Teacher;
 import com.elementaryschool.model.services.SchoolService;
 
 /**
