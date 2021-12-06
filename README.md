@@ -9,7 +9,7 @@ MSSE 670: Object Oriented Software Construction
 
 Professor: Ishmael Thomas
 
-“Elementary School Registration” application is used to enroll students in elementary school grades (Kindergarten, First Grade, Second Grade, Third Grade, Fourth Grade and Fifth Grade). School Registrar will enter information in Registration Form based on paper application received from Students. School Registrar will assign one class section (A or B) to students. Each class section has specific teacher assigned. After successful enrollment registration information will be displayed. Once student enrollment is successfully done, School Registrar can update the registration or delete the registration. Only one registration application per Student is allowed.
+“Elementary School Registration” application is used to enroll students in elementary school grades (Kindergarten, First Grade, Second Grade, Third Grade, Fourth Grade and Fifth Grade). School Registrar will enter information in Registration Form based on paper application received from Students. School Registrar will assign one class section (A or B) to students from Grade Information Table. Each class section has specific teacher assigned and teacher information will be displayed in Teacher Information Table. After successful enrollment registration information will be displayed in Student Registration Table. Once student enrollment is successfully done, School Registrar can update the registration or delete the registration. Only one registration application per Student is allowed.
 
 # Database Setup
 
@@ -90,8 +90,18 @@ INSERT INTO teacher (tfirstname, tlastname, teachergrade, teacherexp) VALUES('Te
 INSERT INTO teacher (tfirstname, tlastname, teachergrade, teacherexp) VALUES('TestFirstName12', 'TestLastName12', '12', '12');
 ```
 
+**Create Table schoolnamelabel**
 
+```
+CREATE TABLE schoolnamelabel (
+    elementaryschoolname VARCHAR(128) NOT NULL
+);
+```
+**Insert below data in to schoolnamelabel Table**
 
+```
+INSERT into schoolnamelabel (elementaryschoolname) VALUES ('MSSE-670 Elementary School Registration Project');
+```
 
 # References
 
@@ -102,3 +112,5 @@ Thomas, I. (2013). E-Pedigree Project Code. Anderson College of Business & Compu
 Edureka (2018). MySQL Workbench Tutorial . Retrieved from https://www.youtube.com/watch?v=uKwR9fWsZJ4
 
 Java Guides (2020). Java Swing Registration Form with MySQL Database in Eclipse. Retrieved from https://www.youtube.com/watch?v=Gwwfetb5CJs
+
+stackoverflow (2016). Check if record exists in database with resultset. Retrieved from https://stackoverflow.com/questions/35083680/check-if-record-exists-in-database-with-resultset

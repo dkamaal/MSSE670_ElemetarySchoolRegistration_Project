@@ -6,8 +6,6 @@ import com.elementaryschool.model.services.SchoolService;
 
 
 /**
- * Student Service Implementation Register Student Application
- * 
  * @author Danish Kamaal
  *
  */

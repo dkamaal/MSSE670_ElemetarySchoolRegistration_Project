@@ -1,8 +1,5 @@
 package com.elementaryschool.view;
 
-
-
-
 import com.elementaryschool.model.business.exceptions.ServiceLoadException;
 
 import java.awt.EventQueue;
@@ -17,6 +14,7 @@ import javax.swing.JButton;
 
 import com.elementaryschool.model.business.managers.DeleteStudentManager;
 import com.elementaryschool.model.business.managers.DisplayGradeManager;
+import com.elementaryschool.model.business.managers.DisplayRegistrarManager;
 import com.elementaryschool.model.business.managers.DisplayStudentManager;
 import com.elementaryschool.model.business.managers.DisplayTeacherManager;
 import com.elementaryschool.model.business.managers.RegisterStudentManager;
@@ -31,11 +29,12 @@ import java.awt.event.ActionEvent;
 
 import com.elementaryschool.model.domain.Student;
 
-
-
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
+import java.awt.Color;
+import javax.swing.border.BevelBorder;
+import javax.swing.border.CompoundBorder;
 
 @SuppressWarnings("serial")
 public class StudentJFrame extends JFrame {
@@ -49,6 +48,7 @@ public class StudentJFrame extends JFrame {
 	private JTable table;
 	private JTable gradetable;
 	private JTable teachertable;
+	private JLabel schoolNameLabel = new JLabel();
 
 	/**
 	 * Launch the application.
@@ -74,6 +74,7 @@ public class StudentJFrame extends JFrame {
 		StudentRegistrationTableDisplay();
 		GradeTableDisplay();
 		TeacherTableDisplay();
+		RegistrarSchoolNameDisplay();
 	}
 
 	// Display Student Table Method that Initializes with Register, Update and
@@ -85,10 +86,16 @@ public class StudentJFrame extends JFrame {
 			DisplayStudentManager dspMgr = new DisplayStudentManager();
 			DefaultTableModel stumodel = dspMgr.displayStudentTable();
 			table.setModel(stumodel);
+			table.getColumnModel().getColumn(0).setPreferredWidth(60);
+			table.getColumnModel().getColumn(3).setPreferredWidth(40);
+			table.getColumnModel().getColumn(4).setPreferredWidth(90);
+			table.getColumnModel().getColumn(5).setPreferredWidth(65);
+			table.getColumnModel().getColumn(6).setPreferredWidth(85);
 		}
 
-		catch (Exception e) {
-			System.out.println("Unable to load Student Registration Table");
+		catch (ServiceLoadException e) {
+			JOptionPane.showMessageDialog(null, "Unable to load Student Registration Table. Please contact System/Database Administrator");
+			e.printStackTrace();
 		}
 
 	}
@@ -101,10 +108,13 @@ public class StudentJFrame extends JFrame {
 			DisplayGradeManager dspGrdMgr = new DisplayGradeManager();
 			DefaultTableModel grdmodel = dspGrdMgr.displayGradeTable();
 			gradetable.setModel(grdmodel);
+			gradetable.getColumnModel().getColumn(0).setPreferredWidth(30);
+			gradetable.getColumnModel().getColumn(1).setPreferredWidth(80);
 		}
 
-		catch (Exception e) {
-			System.out.println("Unable to load Grade Table");
+		catch (ServiceLoadException e) {
+			JOptionPane.showMessageDialog(null, "Unable to load Grade Table. Please contact System/Database Administrator");
+			e.printStackTrace();
 		}
 
 	}
@@ -117,10 +127,33 @@ public class StudentJFrame extends JFrame {
 			DisplayTeacherManager dspTchMgr = new DisplayTeacherManager();
 			DefaultTableModel tchmodel = dspTchMgr.displayTeacherTable();
 			teachertable.setModel(tchmodel);
+			teachertable.getColumnModel().getColumn(0).setPreferredWidth(30);
+			teachertable.getColumnModel().getColumn(1).setPreferredWidth(95);
+			teachertable.getColumnModel().getColumn(2).setPreferredWidth(90);
+			teachertable.getColumnModel().getColumn(3).setPreferredWidth(60);
 		}
 
-		catch (Exception e) {
-			System.out.println("Unable to load Grade Table");
+		catch (ServiceLoadException e) {
+			JOptionPane.showMessageDialog(null, "Unable to load Teacher Table. Please contact System/Database Administrator");
+			e.printStackTrace();
+		}
+
+	}
+
+	// Display School Name in Label
+
+	public void RegistrarSchoolNameDisplay() {
+		try {
+			DisplayRegistrarManager dspRgsMgr = new DisplayRegistrarManager();
+			String rgsSchoolName = dspRgsMgr.displayRegistrarSchoolName();
+			schoolNameLabel.setForeground(Color.WHITE);
+
+			schoolNameLabel.setText(rgsSchoolName);
+		}
+
+		catch (ServiceLoadException e) {
+			JOptionPane.showMessageDialog(null, "Unable to load School Name. Please contact System/Database Administrator");
+			e.printStackTrace();
 		}
 
 	}
@@ -128,186 +161,235 @@ public class StudentJFrame extends JFrame {
 	public void Initialize() {
 
 		frame = new JFrame();
+		frame.getContentPane().setBackground(new Color(51, 153, 255));
 		frame.getContentPane().setFont(new Font("Tahoma", Font.PLAIN, 14));
-		frame.setBounds(100, 100, 1401, 954);
+		frame.setBounds(100, 100, 1626, 983);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.getContentPane().setLayout(null);
 
 		// Elementary School Registration Label
 
-		JLabel lblNewLabel = new JLabel("Elementary School Registration");
-		lblNewLabel.setFont(new Font("Tahoma", Font.BOLD, 24));
-		lblNewLabel.setBounds(498, 10, 422, 29);
-		frame.getContentPane().add(lblNewLabel);
+		schoolNameLabel.setFont(new Font("Tahoma", Font.BOLD, 24));
+		schoolNameLabel.setBounds(480, 10, 679, 29);
+		frame.getContentPane().add(schoolNameLabel);
 
 		// Student Registration Form Panel
 		JPanel panel = new JPanel();
-		panel.setBorder(new EtchedBorder(EtchedBorder.LOWERED, null, null));
-		panel.setBounds(26, 89, 471, 395);
+		panel.setBackground(Color.WHITE);
+		panel.setBorder(new EtchedBorder(EtchedBorder.RAISED, null, null));
+		panel.setBounds(26, 89, 546, 395);
 		frame.getContentPane().add(panel);
 		panel.setLayout(null);
 
 		// Student Registration Form Lables
 
-		JLabel lblNewLabel_FirstName = new JLabel("First Name");
+		JLabel lblNewLabel_FirstName = new JLabel("FIRST NAME");
 		lblNewLabel_FirstName.setFont(new Font("Tahoma", Font.PLAIN, 16));
-		lblNewLabel_FirstName.setBounds(23, 34, 97, 20);
+		lblNewLabel_FirstName.setBounds(25, 29, 100, 20);
 		panel.add(lblNewLabel_FirstName);
 
-		JLabel lblNewLabel_LastName = new JLabel("Last Name");
+		JLabel lblNewLabel_LastName = new JLabel("LAST NAME");
 		lblNewLabel_LastName.setFont(new Font("Tahoma", Font.PLAIN, 16));
-		lblNewLabel_LastName.setBounds(23, 84, 97, 20);
+		lblNewLabel_LastName.setBounds(25, 79, 100, 20);
 		panel.add(lblNewLabel_LastName);
 
-		JLabel lblNewLabel_Age = new JLabel("Age");
+		JLabel lblNewLabel_Age = new JLabel("AGE");
 		lblNewLabel_Age.setFont(new Font("Tahoma", Font.PLAIN, 16));
-		lblNewLabel_Age.setBounds(23, 134, 97, 20);
+		lblNewLabel_Age.setBounds(25, 129, 100, 20);
 		panel.add(lblNewLabel_Age);
 
-		JLabel lblNewLabel_Email = new JLabel("Email");
+		JLabel lblNewLabel_Email = new JLabel("EMAIL");
 		lblNewLabel_Email.setFont(new Font("Tahoma", Font.PLAIN, 16));
-		lblNewLabel_Email.setBounds(23, 184, 97, 20);
+		lblNewLabel_Email.setBounds(25, 179, 100, 20);
 		panel.add(lblNewLabel_Email);
 
-		JLabel lblNewLabel_Mobile = new JLabel("Mobile");
+		JLabel lblNewLabel_Mobile = new JLabel("MOBILE");
 		lblNewLabel_Mobile.setFont(new Font("Tahoma", Font.PLAIN, 16));
-		lblNewLabel_Mobile.setBounds(23, 234, 97, 20);
+		lblNewLabel_Mobile.setBounds(25, 229, 100, 20);
 		panel.add(lblNewLabel_Mobile);
 
-		JLabel lblNewLabel_Grade = new JLabel("Grade");
+		JLabel lblNewLabel_Grade = new JLabel("GRADE");
 		lblNewLabel_Grade.setToolTipText("Input Grade from Grade Table");
 		lblNewLabel_Grade.setFont(new Font("Tahoma", Font.PLAIN, 16));
-		lblNewLabel_Grade.setBounds(23, 284, 97, 20);
+		lblNewLabel_Grade.setBounds(25, 279, 100, 20);
 		panel.add(lblNewLabel_Grade);
 
 		// Student Registration Form Text Fields
 
 		txtsfirstname = new JTextField();
-		txtsfirstname.setBounds(147, 37, 201, 19);
+		txtsfirstname.setFont(new Font("Tahoma", Font.PLAIN, 18));
+		txtsfirstname.setBounds(155, 20, 250, 36);
 		panel.add(txtsfirstname);
 		txtsfirstname.setColumns(10);
 
 		txtslastname = new JTextField();
-		txtslastname.setBounds(147, 87, 201, 19);
+		txtslastname.setFont(new Font("Tahoma", Font.PLAIN, 18));
+		txtslastname.setBounds(155, 70, 250, 36);
 		panel.add(txtslastname);
 		txtslastname.setColumns(10);
 
 		txtage = new JTextField();
+		txtage.setFont(new Font("Tahoma", Font.PLAIN, 18));
 		// To accept only Max of 2 Digits in Age Text Field
 		txtage.setDocument(new TextFieldLimit(2));
 		// To accept only Digits in Age Field
 		txtage.addKeyListener(new KeyAdapter() {
 			@Override
-			public void keyTyped(KeyEvent evtage) { 
-				
+			public void keyTyped(KeyEvent evtage) {
+
 				char d = evtage.getKeyChar();
-				if(!Character.isDigit(d)) {
+				if (!Character.isDigit(d)) {
 					evtage.consume();
 				}
 			}
 		});
 		txtage.setToolTipText("Age Must Be maximum of 2 Digits");
-		txtage.setBounds(147, 137, 201, 19);
+		txtage.setBounds(155, 120, 250, 36);
 		panel.add(txtage);
 		txtage.setColumns(10);
 
 		txtemail = new JTextField();
-		txtemail.setBounds(147, 187, 201, 19);
+		txtemail.setFont(new Font("Tahoma", Font.PLAIN, 18));
+		txtemail.setBounds(155, 170, 250, 36);
 		panel.add(txtemail);
 		txtemail.setColumns(10);
 
 		txtmobile = new JTextField();
+		txtmobile.setFont(new Font("Tahoma", Font.PLAIN, 18));
 		// To accept only Max of 10 Digits in Mobile Text Field
 		txtmobile.setDocument(new TextFieldLimit(10));
 		// To accept only Digits in Mobile Field
 		txtmobile.addKeyListener(new KeyAdapter() {
 			@Override
-			public void keyTyped(KeyEvent evtmobile) { 
-				
+			public void keyTyped(KeyEvent evtmobile) {
+
 				char e = evtmobile.getKeyChar();
-				if(!Character.isDigit(e)) {
+				if (!Character.isDigit(e)) {
 					evtmobile.consume();
 				}
 			}
 		});
 		txtmobile.setToolTipText("Mobile Number must be 10 Digits");
-		txtmobile.setBounds(147, 237, 201, 19);
+		txtmobile.setBounds(155, 220, 250, 36);
 		panel.add(txtmobile);
 		txtmobile.setColumns(10);
 
 		txtsgrade = new JTextField();
+		txtsgrade.setFont(new Font("Tahoma", Font.PLAIN, 18));
 		txtsgrade.setToolTipText("Input Grade from Grade Table");
-		txtsgrade.setBounds(147, 287, 201, 19);
+		txtsgrade.setBounds(155, 270, 250, 36);
 		panel.add(txtsgrade);
 		txtsgrade.setColumns(10);
 
 		// Student Registration Form Buttons
 
 		JButton registerButton = new JButton("REGISTER");
+		registerButton.setBorderPainted(false);
+		registerButton.setForeground(Color.WHITE);
+		registerButton.setBackground(new Color(51, 153, 255));
 		registerButton.setFont(new Font("Tahoma", Font.PLAIN, 18));
-		registerButton.setBounds(10, 352, 122, 21);
+		registerButton.setBounds(10, 352, 120, 25);
 		panel.add(registerButton);
 
-		JButton updateButton = new JButton("UDPATE");
+		JButton updateButton = new JButton("UPDATE");
+		updateButton.setBackground(new Color(255, 140, 0));
+		updateButton.setBorderPainted(false);
+		updateButton.setForeground(Color.WHITE);
 		updateButton.setToolTipText("Select Student Application from Student Registration Table");
 
 		updateButton.setFont(new Font("Tahoma", Font.PLAIN, 18));
-		updateButton.setBounds(134, 352, 104, 21);
+		updateButton.setBounds(145, 352, 120, 25);
 		panel.add(updateButton);
 
 		JButton deleteButton = new JButton("DELETE");
+		deleteButton.setBackground(new Color(255, 69, 0));
+		deleteButton.setBorderPainted(false);
+		deleteButton.setForeground(Color.WHITE);
 		deleteButton.setFont(new Font("Tahoma", Font.PLAIN, 18));
-		deleteButton.setBounds(244, 352, 104, 21);
+		deleteButton.setBounds(280, 352, 120, 25);
 		panel.add(deleteButton);
-		
+
 		JButton clearButton = new JButton("CLEAR");
+		clearButton.setBorderPainted(false);
+		clearButton.setBackground(new Color(0, 139, 139));
+		clearButton.setForeground(Color.WHITE);
 		clearButton.setFont(new Font("Tahoma", Font.PLAIN, 18));
-		clearButton.setBounds(358, 352, 103, 21);
+		clearButton.setBounds(415, 352, 120, 25);
 		panel.add(clearButton);
 
 		// Student Application Table
 
 		JScrollPane scrollPane = new JScrollPane();
-		scrollPane.setBounds(26, 537, 1339, 359);
+		//scrollPane.setBackground(Color.WHITE);
+		scrollPane.getViewport().setBackground(Color.WHITE);//To set Background color of Scrollpane
+		scrollPane.getViewport().setOpaque(true);//To set Background color of Scrollpane
+		scrollPane.setBorder(new CompoundBorder(new BevelBorder(BevelBorder.RAISED, null, null, null, null), null));
+		scrollPane.setFont(new Font("Tahoma", Font.PLAIN, 14));
+		scrollPane.setBounds(26, 537, 1576, 359);
 		frame.getContentPane().add(scrollPane);
 		table = new JTable();
+		table.getTableHeader().setFont(new Font("Tahoma", Font.PLAIN, 18));//Header font
+		table.getTableHeader().setBackground(new Color(188, 143, 143));//Header Background color
+		table.getTableHeader().setForeground(Color.WHITE);//Header Background color
+		table.setBackground(Color.WHITE);
+	    table.setFont(new Font("Tahoma", Font.PLAIN, 16));
 		scrollPane.setViewportView(table);
 
 		// Grade Table
 
 		JScrollPane scrollPaneGrade = new JScrollPane();
-		scrollPaneGrade.setBounds(507, 89, 265, 395);
+		//scrollPaneGrade.setBackground(Color.WHITE);
+		scrollPaneGrade.getViewport().setBackground(Color.WHITE);//To set Background color of Scrollpane
+		scrollPaneGrade.getViewport().setOpaque(true);//To set Background color of Scrollpane
+		scrollPaneGrade.setBorder(new EtchedBorder(EtchedBorder.RAISED, null, null));
+		scrollPaneGrade.setBounds(582, 89, 321, 395);
 		frame.getContentPane().add(scrollPaneGrade);
 		gradetable = new JTable();
+		gradetable.getTableHeader().setFont(new Font("Tahoma", Font.PLAIN, 18));//Header font
+		gradetable.getTableHeader().setBackground(new Color(188, 143, 143));//Header Background color
+		gradetable.getTableHeader().setForeground(Color.WHITE);//Header Background color
+		gradetable.setFont(new Font("Tahoma", Font.PLAIN, 16));
 		scrollPaneGrade.setViewportView(gradetable);
 
 		// Teacher Table
 
 		JScrollPane scrollPaneTeacher = new JScrollPane();
-		scrollPaneTeacher.setBounds(785, 89, 580, 395);
+		//scrollPaneTeacher.setBackground(Color.WHITE);
+		scrollPaneTeacher.getViewport().setBackground(Color.WHITE);//To set Background color of Scrollpane
+		scrollPaneTeacher.getViewport().setOpaque(true);//To set Background color of Scrollpane
+		scrollPaneTeacher.setBorder(new EtchedBorder(EtchedBorder.RAISED, null, null));
+		scrollPaneTeacher.setBounds(913, 89, 689, 395);
 		frame.getContentPane().add(scrollPaneTeacher);
 		teachertable = new JTable();
+		teachertable.getTableHeader().setFont(new Font("Tahoma", Font.PLAIN, 18));//Header font
+		teachertable.getTableHeader().setBackground(new Color(188, 143, 143));//Header Background color
+		teachertable.getTableHeader().setForeground(Color.WHITE);//Header Background color
+		teachertable.setFont(new Font("Tahoma", Font.PLAIN, 16));
 		scrollPaneTeacher.setViewportView(teachertable);
-		
+
 		JLabel registrationFormLabel = new JLabel("Registration Form");
-		registrationFormLabel.setFont(new Font("Tahoma", Font.ITALIC, 16));
-		registrationFormLabel.setBounds(188, 59, 144, 20);
+		registrationFormLabel.setForeground(Color.WHITE);
+		registrationFormLabel.setFont(new Font("Tahoma", Font.BOLD | Font.ITALIC, 16));
+		registrationFormLabel.setBounds(221, 59, 177, 20);
 		frame.getContentPane().add(registrationFormLabel);
-		
+
 		JLabel gradeTableLabel = new JLabel("Grade Table");
-		gradeTableLabel.setFont(new Font("Tahoma", Font.ITALIC, 16));
-		gradeTableLabel.setBounds(582, 59, 118, 20);
+		gradeTableLabel.setForeground(Color.WHITE);
+		gradeTableLabel.setFont(new Font("Tahoma", Font.BOLD | Font.ITALIC, 16));
+		gradeTableLabel.setBounds(688, 59, 118, 20);
 		frame.getContentPane().add(gradeTableLabel);
-		
+
 		JLabel teacherTableLabel = new JLabel("Teacher's Table");
-		teacherTableLabel.setFont(new Font("Tahoma", Font.ITALIC, 16));
-		teacherTableLabel.setBounds(975, 59, 137, 20);
+		teacherTableLabel.setForeground(Color.WHITE);
+		teacherTableLabel.setFont(new Font("Tahoma", Font.BOLD | Font.ITALIC, 16));
+		teacherTableLabel.setBounds(1164, 59, 137, 20);
 		frame.getContentPane().add(teacherTableLabel);
-		
-		JLabel lblNewLabel_1 = new JLabel("Student Registration Table");
-		lblNewLabel_1.setFont(new Font("Tahoma", Font.ITALIC, 16));
-		lblNewLabel_1.setBounds(608, 505, 207, 22);
-		frame.getContentPane().add(lblNewLabel_1);
+
+		JLabel studentTableLabel = new JLabel("Student Registration Table");
+		studentTableLabel.setForeground(Color.WHITE);
+		studentTableLabel.setFont(new Font("Tahoma", Font.BOLD | Font.ITALIC, 16));
+		studentTableLabel.setBounds(660, 505, 262, 22);
+		frame.getContentPane().add(studentTableLabel);
 
 		// Register Button ActionListener
 
@@ -332,6 +414,7 @@ public class StudentJFrame extends JFrame {
 					try {
 						rgsMgr.registerNewStudent(sTU1);
 					} catch (ServiceLoadException e1) {
+						JOptionPane.showMessageDialog(null, "Unable to Register Student. Please contact System/Database Administrator");
 						e1.printStackTrace();
 					}
 
@@ -358,13 +441,11 @@ public class StudentJFrame extends JFrame {
 
 		updateButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				
 
-				
 				DefaultTableModel model1 = (DefaultTableModel) table.getModel();
 
 				int selectedIndex = table.getSelectedRow();
-				
+
 				if (txtsfirstname.getText().isEmpty() || txtslastname.getText().isEmpty() || txtage.getText().isEmpty()
 						|| txtemail.getText().isEmpty() || txtmobile.getText().isEmpty()
 						|| txtsgrade.getText().isEmpty()) {
@@ -372,48 +453,48 @@ public class StudentJFrame extends JFrame {
 																					// data for registration
 
 				}
-				
-				// Checking if user selected student registration from Student Registration Table for Update
+
+				// Checking if user selected student registration from Student Registration
+				// Table for Update
 				else if (selectedIndex < 0) {
-					JOptionPane.showMessageDialog(null, "Please Select Student Registration from Student Registration Table");
+					JOptionPane.showMessageDialog(null,
+							"Please Select Student Registration from Student Registration Table");
 				}
-				
+
 				else {
 
-				int id = Integer.parseInt(model1.getValueAt(selectedIndex, 0).toString());
-				
-				
+					int id = Integer.parseInt(model1.getValueAt(selectedIndex, 0).toString());
 
+					Student sTU2 = new Student(id, txtsfirstname.getText(), txtslastname.getText(), txtage.getText(),
+							txtemail.getText(), txtmobile.getText(), txtsgrade.getText());
 
-				Student sTU2 = new Student(id, txtsfirstname.getText(), txtslastname.getText(), txtage.getText(),
-						txtemail.getText(), txtmobile.getText(), txtsgrade.getText());
+					UpdateStudentManager updMgr = new UpdateStudentManager();
 
-				UpdateStudentManager updMgr = new UpdateStudentManager();
+					try {
+						updMgr.updateNewStudent(sTU2);
+					} catch (ServiceLoadException e1) {
+						JOptionPane.showMessageDialog(null, "Unable to Update Student Registration. Please contact System/Database Administrator");
+						e1.printStackTrace();
+					}
 
-				try {
-					updMgr.updateNewStudent(sTU2);
-				} catch (ServiceLoadException e1) {
-					e1.printStackTrace();
-				}
+					finally {
+						// Text Boxes are cleared
 
-				finally {
-					// Text Boxes are cleared
+						txtsfirstname.setText("");
+						txtslastname.setText("");
+						txtage.setText("");
+						txtemail.setText("");
+						txtmobile.setText("");
+						txtsgrade.setText("");
 
-					txtsfirstname.setText("");
-					txtslastname.setText("");
-					txtage.setText("");
-					txtemail.setText("");
-					txtmobile.setText("");
-					txtsgrade.setText("");
+						// Focus comes back to Student First Name
 
-					// Focus comes back to Student First Name
+						txtsfirstname.requestFocus();
 
-					txtsfirstname.requestFocus();
+						// Updating Student Table after updating Student Registration record
 
-					// Updating Student Table after updating Student Registration record
-
-					StudentRegistrationTableDisplay();
-				}
+						StudentRegistrationTableDisplay();
+					}
 				}
 			}
 		});
@@ -424,37 +505,35 @@ public class StudentJFrame extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 
 				try {
-				DefaultTableModel model1 = (DefaultTableModel) table.getModel();
+					DefaultTableModel model1 = (DefaultTableModel) table.getModel();
 
-				int selectedIndex = table.getSelectedRow();
-				
-				
-				//Checking below if user selected Student Record to Delete it
-				
-				if (selectedIndex < 0) {
-					JOptionPane.showMessageDialog(null, "Please Select Student Registration from Student Registration Table");
+					int selectedIndex = table.getSelectedRow();
+
+					// Checking below if user selected Student Record to Delete it
+
+					if (selectedIndex < 0) {
+						JOptionPane.showMessageDialog(null,
+								"Please Select Student Registration from Student Registration Table");
+					}
+
+					else {
+						int id = Integer.parseInt(model1.getValueAt(selectedIndex, 0).toString());
+
+						Student sTU2 = new Student(id, txtsfirstname.getText(), txtslastname.getText(),
+								txtage.getText(), txtemail.getText(), txtmobile.getText(), txtsgrade.getText());
+
+						DeleteStudentManager delMgr = new DeleteStudentManager();
+
+						delMgr.deleteNewStudent(sTU2);
+					}
+
 				}
 
-				
-				else {
-				int id = Integer.parseInt(model1.getValueAt(selectedIndex, 0).toString());
-
-				Student sTU2 = new Student(id, txtsfirstname.getText(), txtslastname.getText(), txtage.getText(),
-						txtemail.getText(), txtmobile.getText(), txtsgrade.getText());
-
-				DeleteStudentManager delMgr = new DeleteStudentManager();
-
-				
-					delMgr.deleteNewStudent(sTU2);
-				} 
-				
-				}
-				
-				
 				catch (ServiceLoadException e1) {
+					JOptionPane.showMessageDialog(null, "Unable to Delete Student Registration. Please contact System/Database Administrator");
 					e1.printStackTrace();
 				}
-				
+
 				catch (Exception e1) {
 					System.out.println("Something Went Wrong");
 				}
@@ -477,12 +556,12 @@ public class StudentJFrame extends JFrame {
 
 					StudentRegistrationTableDisplay();
 				}
-				
+
 			}
 		});
-		
-		//Clear Button Text Fields Action Listener
-		
+
+		// Clear Button Text Fields Action Listener
+
 		clearButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				// Text Boxes are cleared

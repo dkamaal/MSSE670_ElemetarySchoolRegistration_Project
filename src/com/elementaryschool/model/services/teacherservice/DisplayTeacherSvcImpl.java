@@ -34,8 +34,7 @@ public class DisplayTeacherSvcImpl implements DisplayTeacherService {
 			// Load the Properties File
 			
 			Properties dbprops = new Properties();
-            dbprops.load(new FileInputStream("C:/Users/danishkamaal2011/eclipse-workspace/MSSE670_ElemetarySchoolRegistration_Project/config/database.properties"));
-            
+			dbprops.load(new FileInputStream("C:/Users/danishkamaal2011/eclipse-workspace/MSSE670_ElemetarySchoolRegistration_Project/config/database.properties"));
             // Read the dbprops
             
             String user = dbprops.getProperty("username");

@@ -31,62 +31,61 @@ public class RegisterStudentSvcImpl implements RegisterStudentService {
 
 		boolean isRegisterStudent = false;
 
-
-
 		Connection con1;
 		PreparedStatement insert;
 
 		try {
 
 			// Load the Properties File
-			
-			Properties dbprops = new Properties();
-            dbprops.load(new FileInputStream("C:/Users/danishkamaal2011/eclipse-workspace/MSSE670_ElemetarySchoolRegistration_Project/config/database.properties"));
-            
-            // Read the dbprops
-            
-            String user = dbprops.getProperty("username");
-            String password = dbprops.getProperty("password");
-            String url = dbprops.getProperty("databaseurl");
 
-			// establish the connection
+			Properties dbprops = new Properties();
+			dbprops.load(new FileInputStream("C:/Users/danishkamaal2011/eclipse-workspace/MSSE670_ElemetarySchoolRegistration_Project/config/database.properties"));
+
+			// Read the dbprops
+
+			String user = dbprops.getProperty("username");
+			String password = dbprops.getProperty("password");
+			String url = dbprops.getProperty("databaseurl");
+
+			// establish the connection to MySQL Database
 
 			con1 = DriverManager.getConnection(url, user, password);
-			
-			// Check if Record Already Exist in Database
-			
-			insert = con1.prepareStatement("SELECT * FROM student WHERE sfirstname = ? AND slastname = ?");
-			insert.setString(1, student.getsFirstName());
-			insert.setString(2, student.getsLastName());
 
-			ResultSet rs = insert.executeQuery();
-			
-			if (!rs.isBeforeFirst()) {  //isBeforeFirst() will return true if the cursor is before the first row
-			insert = con1.prepareStatement(
-					"insert into student (sfirstname,slastname,age,email,mobile,sgrade)values(?,?,?,?,?,?)");
+			// Check if Record Already Exist in Database
+
+			insert = con1.prepareStatement("SELECT * FROM student WHERE sfirstname = ? AND slastname = ? AND age= ?");
 			insert.setString(1, student.getsFirstName());
 			insert.setString(2, student.getsLastName());
 			insert.setString(3, student.getAge());
-			insert.setString(4, student.getEmail());
-			insert.setString(5, student.getMobile());
-			insert.setString(6, student.getSgrade());
-			insert.executeUpdate(); // To execure the query
-			JOptionPane.showMessageDialog(null, "Student Record Saved");
+
+			ResultSet rs = insert.executeQuery();
+
+			if (!rs.isBeforeFirst()) { // isBeforeFirst() will return true if the cursor is before the first row
+				insert = con1.prepareStatement(
+						"insert into student (sfirstname,slastname,age,email,mobile,sgrade)values(?,?,?,?,?,?)");
+				insert.setString(1, student.getsFirstName());
+				insert.setString(2, student.getsLastName());
+				insert.setString(3, student.getAge());
+				insert.setString(4, student.getEmail());
+				insert.setString(5, student.getMobile());
+				insert.setString(6, student.getSgrade());
+				insert.executeUpdate(); // To execure the query
+				JOptionPane.showMessageDialog(null, "Student Record Saved");
 			}
-			
-			else
-			{
-				JOptionPane.showMessageDialog(null, "Student Registration Record Exist with Same First Name and Last Name");
+
+			else {
+				JOptionPane.showMessageDialog(null,
+						"Student Registration Record Exist with Same First Name, Last Name and Age");
 			}
-			
- 
+			rs.close();
+			insert.close();
+			con1.close();
+
 		} catch (SQLException ex) {
 			Logger.getLogger(Student.class.getName()).log(Level.SEVERE, null, ex);
 		} catch (FileNotFoundException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 

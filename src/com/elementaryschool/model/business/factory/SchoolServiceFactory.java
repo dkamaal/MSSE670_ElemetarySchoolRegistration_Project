@@ -30,9 +30,7 @@ public class SchoolServiceFactory {
 	private String getServImplName(String serviceName) throws Exception {
 
 		java.util.Properties props = new java.util.Properties();
-
-		java.io.FileInputStream source = new java.io.FileInputStream(
-				"C:/Users/danishkamaal2011/eclipse-workspace/MSSE670_ElemetarySchoolRegistration_Project/config/application.properties");
+		java.io.FileInputStream source = new java.io.FileInputStream("C:/Users/danishkamaal2011/eclipse-workspace/MSSE670_ElemetarySchoolRegistration_Project/config/application.properties");
 		props.load(source);
 		source.close();
 		return props.getProperty(serviceName);
