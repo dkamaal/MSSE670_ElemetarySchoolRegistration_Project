@@ -103,6 +103,20 @@ CREATE TABLE schoolnamelabel (
 INSERT into schoolnamelabel (elementaryschoolname) VALUES ('MSSE-670 Elementary School Registration Project');
 ```
 
+**System Requirements**
+```
+Minimum JRE requirement is Version 1.8
+
+```
+**Configuration**
+
+```
+"application.properties" file located at com.elementaryschool.config has all services. In case if any service is not required it can be removed from file.
+
+"database.properties" file located at com.elementaryschool.config has database credentials. Currently its connected to cloud database and to run application no database configuration is required. But if local MySQL database is used "database.properties" file credentials are required to be updated accordingly.
+
+```
+
 # References
 
 Thomas, I. (2013). E-Pedigree Design Document. Anderson College of Business & Computing, Regis University
@@ -113,4 +127,15 @@ Edureka (2018). MySQL Workbench Tutorial . Retrieved from https://www.youtube.co
 
 Java Guides (2020). Java Swing Registration Form with MySQL Database in Eclipse. Retrieved from https://www.youtube.com/watch?v=Gwwfetb5CJs
 
+LUV2CODE (2014). JAVA JDBC TUTORIAL. Retrieved from https://www.youtube.com/watch?v=-LrmzNDPVx8
+
+AHMAD, J (2020). Allow Only numbes in JTextfield in Java Desktop Applications using Netbeans IDE. Retrieved from https://www.youtube.com/watch?v=1HyMztaV4ME
+
+stackoverflow (2010). How can I change the font of JTable Header. Retrieved from https://stackoverflow.com/questions/4408644/how-can-i-change-the-font-of-a-jtables-header
+
+Helpdesk Objects (2009). How to limit number of characters in JTextField. Retrieved from http://helpdesk.objects.com.au/java/how-to-limit-number-of-characters-in-jtextfield
+
 stackoverflow (2016). Check if record exists in database with resultset. Retrieved from https://stackoverflow.com/questions/35083680/check-if-record-exists-in-database-with-resultset
+
+Clever Cloud (2021). Cloud MySQL Database. Retrieved from https://www.clever-cloud.com/
+

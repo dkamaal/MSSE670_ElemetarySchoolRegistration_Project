@@ -2,7 +2,6 @@ package com.elementaryschool.model.services;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.sql.Connection;
@@ -67,8 +66,8 @@ public class RegisterStudentSvcImplTest {
 			// Load the Properties File
 			
 			Properties dbprops = new Properties();
-			dbprops.load(new FileInputStream("C:/Users/danishkamaal2011/eclipse-workspace/MSSE670_ElemetarySchoolRegistration_Project/config/database.properties"));
-            
+			//dbprops.load(new FileInputStream("C:/Users/danishkamaal2011/eclipse-workspace/MSSE670_ElemetarySchoolRegistration_Project/config/database.properties"));
+			dbprops.load(getClass().getResourceAsStream("/com/elementaryschool/config/database.properties"));
             // Read the dbprops
             
             String user = dbprops.getProperty("username");

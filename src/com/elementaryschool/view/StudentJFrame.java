@@ -163,14 +163,14 @@ public class StudentJFrame extends JFrame {
 		frame = new JFrame();
 		frame.getContentPane().setBackground(new Color(51, 153, 255));
 		frame.getContentPane().setFont(new Font("Tahoma", Font.PLAIN, 14));
-		frame.setBounds(100, 100, 1626, 983);
+		frame.setBounds(100, 100, 1569, 973);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.getContentPane().setLayout(null);
 
 		// Elementary School Registration Label
 
 		schoolNameLabel.setFont(new Font("Tahoma", Font.BOLD, 24));
-		schoolNameLabel.setBounds(480, 10, 679, 29);
+		schoolNameLabel.setBounds(454, 10, 679, 29);
 		frame.getContentPane().add(schoolNameLabel);
 
 		// Student Registration Form Panel
@@ -325,7 +325,7 @@ public class StudentJFrame extends JFrame {
 		scrollPane.getViewport().setOpaque(true);//To set Background color of Scrollpane
 		scrollPane.setBorder(new CompoundBorder(new BevelBorder(BevelBorder.RAISED, null, null, null, null), null));
 		scrollPane.setFont(new Font("Tahoma", Font.PLAIN, 14));
-		scrollPane.setBounds(26, 537, 1576, 359);
+		scrollPane.setBounds(26, 537, 1507, 359);
 		frame.getContentPane().add(scrollPane);
 		table = new JTable();
 		table.getTableHeader().setFont(new Font("Tahoma", Font.PLAIN, 18));//Header font
@@ -342,7 +342,7 @@ public class StudentJFrame extends JFrame {
 		scrollPaneGrade.getViewport().setBackground(Color.WHITE);//To set Background color of Scrollpane
 		scrollPaneGrade.getViewport().setOpaque(true);//To set Background color of Scrollpane
 		scrollPaneGrade.setBorder(new EtchedBorder(EtchedBorder.RAISED, null, null));
-		scrollPaneGrade.setBounds(582, 89, 321, 395);
+		scrollPaneGrade.setBounds(582, 89, 295, 395);
 		frame.getContentPane().add(scrollPaneGrade);
 		gradetable = new JTable();
 		gradetable.getTableHeader().setFont(new Font("Tahoma", Font.PLAIN, 18));//Header font
@@ -358,7 +358,7 @@ public class StudentJFrame extends JFrame {
 		scrollPaneTeacher.getViewport().setBackground(Color.WHITE);//To set Background color of Scrollpane
 		scrollPaneTeacher.getViewport().setOpaque(true);//To set Background color of Scrollpane
 		scrollPaneTeacher.setBorder(new EtchedBorder(EtchedBorder.RAISED, null, null));
-		scrollPaneTeacher.setBounds(913, 89, 689, 395);
+		scrollPaneTeacher.setBounds(887, 89, 647, 395);
 		frame.getContentPane().add(scrollPaneTeacher);
 		teachertable = new JTable();
 		teachertable.getTableHeader().setFont(new Font("Tahoma", Font.PLAIN, 18));//Header font
@@ -376,13 +376,13 @@ public class StudentJFrame extends JFrame {
 		JLabel gradeTableLabel = new JLabel("Grade Table");
 		gradeTableLabel.setForeground(Color.WHITE);
 		gradeTableLabel.setFont(new Font("Tahoma", Font.BOLD | Font.ITALIC, 16));
-		gradeTableLabel.setBounds(688, 59, 118, 20);
+		gradeTableLabel.setBounds(668, 59, 118, 20);
 		frame.getContentPane().add(gradeTableLabel);
 
 		JLabel teacherTableLabel = new JLabel("Teacher's Table");
 		teacherTableLabel.setForeground(Color.WHITE);
 		teacherTableLabel.setFont(new Font("Tahoma", Font.BOLD | Font.ITALIC, 16));
-		teacherTableLabel.setBounds(1164, 59, 137, 20);
+		teacherTableLabel.setBounds(1127, 59, 137, 20);
 		frame.getContentPane().add(teacherTableLabel);
 
 		JLabel studentTableLabel = new JLabel("Student Registration Table");

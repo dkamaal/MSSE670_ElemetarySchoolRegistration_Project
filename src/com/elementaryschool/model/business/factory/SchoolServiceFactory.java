@@ -1,5 +1,7 @@
 package com.elementaryschool.model.business.factory;
 
+import java.util.Properties;
+
 import com.elementaryschool.model.business.exceptions.ServiceLoadException;
 import com.elementaryschool.model.services.SchoolService;
 
@@ -29,10 +31,18 @@ public class SchoolServiceFactory {
 
 	private String getServImplName(String serviceName) throws Exception {
 
-		java.util.Properties props = new java.util.Properties();
-		java.io.FileInputStream source = new java.io.FileInputStream("C:/Users/danishkamaal2011/eclipse-workspace/MSSE670_ElemetarySchoolRegistration_Project/config/application.properties");
-		props.load(source);
-		source.close();
+		//java.util.Properties props = new java.util.Properties();
+		//java.io.FileInputStream source = new java.io.FileInputStream("com\\elementaryschool\\application.properties");
+		
+		
+		// Load the Properties File
+
+		Properties props = new Properties();
+		//dbprops.load(new FileInputStream("C:/Users/danishkamaal2011/eclipse-workspace/MSSE670_ElemetarySchoolRegistration_Project/config/database.properties"));
+		props.load(getClass().getResourceAsStream("/com/elementaryschool/config/application.properties"));
+		
+		//props.load(source);
+		//source.close();
 		return props.getProperty(serviceName);
 
 	}

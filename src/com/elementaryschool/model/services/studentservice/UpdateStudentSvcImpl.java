@@ -1,6 +1,5 @@
 package com.elementaryschool.model.services.studentservice;
 
-import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.sql.Connection;
@@ -31,7 +30,8 @@ public class UpdateStudentSvcImpl implements UpdateStudentService {
 			// Load the Properties File
 			
 			Properties dbprops = new Properties();
-			dbprops.load(new FileInputStream("C:/Users/danishkamaal2011/eclipse-workspace/MSSE670_ElemetarySchoolRegistration_Project/config/database.properties"));
+			//dbprops.load(new FileInputStream("C:/Users/danishkamaal2011/eclipse-workspace/MSSE670_ElemetarySchoolRegistration_Project/config/database.properties"));
+			dbprops.load(getClass().getResourceAsStream("/com/elementaryschool/config/database.properties"));
             // Read the dbprops
             
             String user = dbprops.getProperty("username");
@@ -52,7 +52,9 @@ public class UpdateStudentSvcImpl implements UpdateStudentService {
 			insert.setInt(7, student.getId());
 			insert.executeUpdate(); // To execute the query
 			JOptionPane.showMessageDialog(null, "Student Record Updated");
-
+			
+			insert.close();
+			con2.close();
 
 		} catch (SQLException ex) {
 			Logger.getLogger(Student.class.getName()).log(Level.SEVERE, null, ex);

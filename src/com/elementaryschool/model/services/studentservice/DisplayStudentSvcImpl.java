@@ -1,6 +1,5 @@
 package com.elementaryschool.model.services.studentservice;
 
-import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.sql.Connection;
@@ -34,7 +33,8 @@ public class DisplayStudentSvcImpl implements DisplayStudentService {
 			// Load the Properties File
 			
 			Properties dbprops = new Properties();
-			dbprops.load(new FileInputStream("C:/Users/danishkamaal2011/eclipse-workspace/MSSE670_ElemetarySchoolRegistration_Project/config/database.properties"));
+			//dbprops.load(new FileInputStream("C:/Users/danishkamaal2011/eclipse-workspace/MSSE670_ElemetarySchoolRegistration_Project/config/database.properties"));
+			dbprops.load(getClass().getResourceAsStream("/com/elementaryschool/config/database.properties"));
             // Read the dbprops
             
             String user = dbprops.getProperty("username");
@@ -64,10 +64,20 @@ public class DisplayStudentSvcImpl implements DisplayStudentService {
 
 				// Below Link was helpful in getting information to have data in to JTable
 				// https://stackoverflow.com/questions/27815400/retrieving-data-from-jdbc-database-into-jtable/43772751
-
+				
 			}
-
+			// Below Code closes Resultset, Statement and Connection
+		    if(rs != null) 
+		        try {rs.close();} catch (SQLException ex){Logger.getLogger(Student.class.getName()).log(Level.SEVERE, null, ex);}
+		    if(st!= null) 
+		        try {st.close();} catch (SQLException ex){Logger.getLogger(Student.class.getName()).log(Level.SEVERE, null, ex);}
+		    if(con5 != null)  
+		        try {con5.close();} catch (SQLException ex){Logger.getLogger(Student.class.getName()).log(Level.SEVERE, null, ex);}
+		    
+		    
 			return model;
+			
+			
 
 		} catch (SQLException ex) {
 			Logger.getLogger(Student.class.getName()).log(Level.SEVERE, null, ex);
@@ -79,6 +89,8 @@ public class DisplayStudentSvcImpl implements DisplayStudentService {
 			e1.printStackTrace();
 		}
 		return studentmodel; // All Rows of Data is returned to JTable
+		
+		
 	}
 
 }

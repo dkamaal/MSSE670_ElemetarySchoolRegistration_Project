@@ -1,6 +1,5 @@
 package com.elementaryschool.model.services.gradeservice;
 
-import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.sql.Connection;
@@ -30,20 +29,22 @@ public class DisplayGradeSvcImpl implements DisplayGradeService {
 		try {
 
 			// Load the Properties File
-			
+
 			Properties dbprops = new Properties();
-			dbprops.load(new FileInputStream("C:/Users/danishkamaal2011/eclipse-workspace/MSSE670_ElemetarySchoolRegistration_Project/config/database.properties"));;
-            
-            // Read the dbprops
-            
-            String user = dbprops.getProperty("username");
-            String password = dbprops.getProperty("password");
-            String url = dbprops.getProperty("databaseurl");
+			// dbprops.load(new
+			// FileInputStream("C:/Users/danishkamaal2011/eclipse-workspace/MSSE670_ElemetarySchoolRegistration_Project/config/database.properties"));
+			dbprops.load(getClass().getResourceAsStream("/com/elementaryschool/config/database.properties"));
+
+			// Read the dbprops
+
+			String user = dbprops.getProperty("username");
+			String password = dbprops.getProperty("password");
+			String url = dbprops.getProperty("databaseurl");
 
 			// establish the connection
 			con4 = DriverManager.getConnection(url, user, password);
 
-			DefaultTableModel model = new DefaultTableModel(new String[] { "GRADE ID", "GRADE AND SECTION" }, 0);
+			DefaultTableModel model = new DefaultTableModel(new String[] { "GRADE ID", "GRADE & SECTION" }, 0);
 
 			st = con4.prepareStatement("SELECT * FROM grade");
 
@@ -60,9 +61,27 @@ public class DisplayGradeSvcImpl implements DisplayGradeService {
 				// https://stackoverflow.com/questions/27815400/retrieving-data-from-jdbc-database-into-jtable/43772751
 
 			}
+			// Below Code closes Resultset, Statement and Connection
+			if (rs != null)
+				try {
+					rs.close();
+				} catch (SQLException ex) {
+					Logger.getLogger(Grade.class.getName()).log(Level.SEVERE, null, ex);
+				}
+			if (st != null)
+				try {
+					st.close();
+				} catch (SQLException ex) {
+					Logger.getLogger(Grade.class.getName()).log(Level.SEVERE, null, ex);
+				}
+			if (con4 != null)
+				try {
+					con4.close();
+				} catch (SQLException ex) {
+					Logger.getLogger(Grade.class.getName()).log(Level.SEVERE, null, ex);
+				}
 
 			return model;
-
 
 		} catch (SQLException ex) {
 			Logger.getLogger(Grade.class.getName()).log(Level.SEVERE, null, ex);
