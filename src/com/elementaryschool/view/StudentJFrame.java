@@ -108,7 +108,7 @@ public class StudentJFrame extends JFrame {
 			DisplayGradeManager dspGrdMgr = new DisplayGradeManager();
 			DefaultTableModel grdmodel = dspGrdMgr.displayGradeTable();
 			gradetable.setModel(grdmodel);
-			gradetable.getColumnModel().getColumn(0).setPreferredWidth(30);
+			gradetable.getColumnModel().getColumn(0).setPreferredWidth(20);
 			gradetable.getColumnModel().getColumn(1).setPreferredWidth(80);
 		}
 
@@ -127,10 +127,10 @@ public class StudentJFrame extends JFrame {
 			DisplayTeacherManager dspTchMgr = new DisplayTeacherManager();
 			DefaultTableModel tchmodel = dspTchMgr.displayTeacherTable();
 			teachertable.setModel(tchmodel);
-			teachertable.getColumnModel().getColumn(0).setPreferredWidth(30);
+			teachertable.getColumnModel().getColumn(0).setPreferredWidth(20);
 			teachertable.getColumnModel().getColumn(1).setPreferredWidth(95);
 			teachertable.getColumnModel().getColumn(2).setPreferredWidth(90);
-			teachertable.getColumnModel().getColumn(3).setPreferredWidth(60);
+			teachertable.getColumnModel().getColumn(3).setPreferredWidth(55);
 		}
 
 		catch (ServiceLoadException e) {
@@ -163,21 +163,21 @@ public class StudentJFrame extends JFrame {
 		frame = new JFrame();
 		frame.getContentPane().setBackground(new Color(51, 153, 255));
 		frame.getContentPane().setFont(new Font("Tahoma", Font.PLAIN, 14));
-		frame.setBounds(100, 100, 1569, 973);
+		frame.setBounds(100, 100, 1367, 725);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.getContentPane().setLayout(null);
 
 		// Elementary School Registration Label
 
 		schoolNameLabel.setFont(new Font("Tahoma", Font.BOLD, 24));
-		schoolNameLabel.setBounds(454, 10, 679, 29);
+		schoolNameLabel.setBounds(389, 10, 679, 29);
 		frame.getContentPane().add(schoolNameLabel);
 
 		// Student Registration Form Panel
 		JPanel panel = new JPanel();
 		panel.setBackground(Color.WHITE);
 		panel.setBorder(new EtchedBorder(EtchedBorder.RAISED, null, null));
-		panel.setBounds(26, 89, 546, 395);
+		panel.setBounds(10, 89, 482, 374);
 		frame.getContentPane().add(panel);
 		panel.setLayout(null);
 
@@ -218,13 +218,13 @@ public class StudentJFrame extends JFrame {
 
 		txtsfirstname = new JTextField();
 		txtsfirstname.setFont(new Font("Tahoma", Font.PLAIN, 18));
-		txtsfirstname.setBounds(155, 20, 250, 36);
+		txtsfirstname.setBounds(150, 20, 250, 36);
 		panel.add(txtsfirstname);
 		txtsfirstname.setColumns(10);
 
 		txtslastname = new JTextField();
 		txtslastname.setFont(new Font("Tahoma", Font.PLAIN, 18));
-		txtslastname.setBounds(155, 70, 250, 36);
+		txtslastname.setBounds(150, 70, 250, 36);
 		panel.add(txtslastname);
 		txtslastname.setColumns(10);
 
@@ -244,13 +244,13 @@ public class StudentJFrame extends JFrame {
 			}
 		});
 		txtage.setToolTipText("Age Must Be maximum of 2 Digits");
-		txtage.setBounds(155, 120, 250, 36);
+		txtage.setBounds(150, 120, 250, 36);
 		panel.add(txtage);
 		txtage.setColumns(10);
 
 		txtemail = new JTextField();
 		txtemail.setFont(new Font("Tahoma", Font.PLAIN, 18));
-		txtemail.setBounds(155, 170, 250, 36);
+		txtemail.setBounds(150, 170, 250, 36);
 		panel.add(txtemail);
 		txtemail.setColumns(10);
 
@@ -270,14 +270,14 @@ public class StudentJFrame extends JFrame {
 			}
 		});
 		txtmobile.setToolTipText("Mobile Number must be 10 Digits");
-		txtmobile.setBounds(155, 220, 250, 36);
+		txtmobile.setBounds(150, 220, 250, 36);
 		panel.add(txtmobile);
 		txtmobile.setColumns(10);
 
 		txtsgrade = new JTextField();
 		txtsgrade.setFont(new Font("Tahoma", Font.PLAIN, 18));
 		txtsgrade.setToolTipText("Input Grade from Grade Table");
-		txtsgrade.setBounds(155, 270, 250, 36);
+		txtsgrade.setBounds(150, 270, 250, 36);
 		panel.add(txtsgrade);
 		txtsgrade.setColumns(10);
 
@@ -287,8 +287,8 @@ public class StudentJFrame extends JFrame {
 		registerButton.setBorderPainted(false);
 		registerButton.setForeground(Color.WHITE);
 		registerButton.setBackground(new Color(51, 153, 255));
-		registerButton.setFont(new Font("Tahoma", Font.PLAIN, 18));
-		registerButton.setBounds(10, 352, 120, 25);
+		registerButton.setFont(new Font("Tahoma", Font.PLAIN, 17));
+		registerButton.setBounds(10, 335, 113, 25);
 		panel.add(registerButton);
 
 		JButton updateButton = new JButton("UPDATE");
@@ -297,24 +297,24 @@ public class StudentJFrame extends JFrame {
 		updateButton.setForeground(Color.WHITE);
 		updateButton.setToolTipText("Select Student Application from Student Registration Table");
 
-		updateButton.setFont(new Font("Tahoma", Font.PLAIN, 18));
-		updateButton.setBounds(145, 352, 120, 25);
+		updateButton.setFont(new Font("Tahoma", Font.PLAIN, 17));
+		updateButton.setBounds(131, 335, 108, 25);
 		panel.add(updateButton);
 
 		JButton deleteButton = new JButton("DELETE");
 		deleteButton.setBackground(new Color(255, 69, 0));
 		deleteButton.setBorderPainted(false);
 		deleteButton.setForeground(Color.WHITE);
-		deleteButton.setFont(new Font("Tahoma", Font.PLAIN, 18));
-		deleteButton.setBounds(280, 352, 120, 25);
+		deleteButton.setFont(new Font("Tahoma", Font.PLAIN, 17));
+		deleteButton.setBounds(249, 335, 108, 25);
 		panel.add(deleteButton);
 
 		JButton clearButton = new JButton("CLEAR");
 		clearButton.setBorderPainted(false);
 		clearButton.setBackground(new Color(0, 139, 139));
 		clearButton.setForeground(Color.WHITE);
-		clearButton.setFont(new Font("Tahoma", Font.PLAIN, 18));
-		clearButton.setBounds(415, 352, 120, 25);
+		clearButton.setFont(new Font("Tahoma", Font.PLAIN, 17));
+		clearButton.setBounds(368, 335, 107, 25);
 		panel.add(clearButton);
 
 		// Student Application Table
@@ -325,10 +325,10 @@ public class StudentJFrame extends JFrame {
 		scrollPane.getViewport().setOpaque(true);//To set Background color of Scrollpane
 		scrollPane.setBorder(new CompoundBorder(new BevelBorder(BevelBorder.RAISED, null, null, null, null), null));
 		scrollPane.setFont(new Font("Tahoma", Font.PLAIN, 14));
-		scrollPane.setBounds(26, 537, 1507, 359);
+		scrollPane.setBounds(9, 505, 1331, 162);
 		frame.getContentPane().add(scrollPane);
 		table = new JTable();
-		table.getTableHeader().setFont(new Font("Tahoma", Font.PLAIN, 18));//Header font
+		table.getTableHeader().setFont(new Font("Tahoma", Font.PLAIN, 17));//Header font
 		table.getTableHeader().setBackground(new Color(188, 143, 143));//Header Background color
 		table.getTableHeader().setForeground(Color.WHITE);//Header Background color
 		table.setBackground(Color.WHITE);
@@ -342,10 +342,10 @@ public class StudentJFrame extends JFrame {
 		scrollPaneGrade.getViewport().setBackground(Color.WHITE);//To set Background color of Scrollpane
 		scrollPaneGrade.getViewport().setOpaque(true);//To set Background color of Scrollpane
 		scrollPaneGrade.setBorder(new EtchedBorder(EtchedBorder.RAISED, null, null));
-		scrollPaneGrade.setBounds(582, 89, 295, 395);
+		scrollPaneGrade.setBounds(495, 89, 252, 374);
 		frame.getContentPane().add(scrollPaneGrade);
 		gradetable = new JTable();
-		gradetable.getTableHeader().setFont(new Font("Tahoma", Font.PLAIN, 18));//Header font
+		gradetable.getTableHeader().setFont(new Font("Tahoma", Font.PLAIN, 17));//Header font
 		gradetable.getTableHeader().setBackground(new Color(188, 143, 143));//Header Background color
 		gradetable.getTableHeader().setForeground(Color.WHITE);//Header Background color
 		gradetable.setFont(new Font("Tahoma", Font.PLAIN, 16));
@@ -358,10 +358,10 @@ public class StudentJFrame extends JFrame {
 		scrollPaneTeacher.getViewport().setBackground(Color.WHITE);//To set Background color of Scrollpane
 		scrollPaneTeacher.getViewport().setOpaque(true);//To set Background color of Scrollpane
 		scrollPaneTeacher.setBorder(new EtchedBorder(EtchedBorder.RAISED, null, null));
-		scrollPaneTeacher.setBounds(887, 89, 647, 395);
+		scrollPaneTeacher.setBounds(751, 89, 590, 374);
 		frame.getContentPane().add(scrollPaneTeacher);
 		teachertable = new JTable();
-		teachertable.getTableHeader().setFont(new Font("Tahoma", Font.PLAIN, 18));//Header font
+		teachertable.getTableHeader().setFont(new Font("Tahoma", Font.PLAIN, 17));//Header font
 		teachertable.getTableHeader().setBackground(new Color(188, 143, 143));//Header Background color
 		teachertable.getTableHeader().setForeground(Color.WHITE);//Header Background color
 		teachertable.setFont(new Font("Tahoma", Font.PLAIN, 16));
@@ -370,25 +370,25 @@ public class StudentJFrame extends JFrame {
 		JLabel registrationFormLabel = new JLabel("Registration Form");
 		registrationFormLabel.setForeground(Color.WHITE);
 		registrationFormLabel.setFont(new Font("Tahoma", Font.BOLD | Font.ITALIC, 16));
-		registrationFormLabel.setBounds(221, 59, 177, 20);
+		registrationFormLabel.setBounds(184, 59, 177, 20);
 		frame.getContentPane().add(registrationFormLabel);
 
 		JLabel gradeTableLabel = new JLabel("Grade Table");
 		gradeTableLabel.setForeground(Color.WHITE);
 		gradeTableLabel.setFont(new Font("Tahoma", Font.BOLD | Font.ITALIC, 16));
-		gradeTableLabel.setBounds(668, 59, 118, 20);
+		gradeTableLabel.setBounds(585, 59, 118, 20);
 		frame.getContentPane().add(gradeTableLabel);
 
 		JLabel teacherTableLabel = new JLabel("Teacher's Table");
 		teacherTableLabel.setForeground(Color.WHITE);
 		teacherTableLabel.setFont(new Font("Tahoma", Font.BOLD | Font.ITALIC, 16));
-		teacherTableLabel.setBounds(1127, 59, 137, 20);
+		teacherTableLabel.setBounds(967, 59, 137, 20);
 		frame.getContentPane().add(teacherTableLabel);
 
 		JLabel studentTableLabel = new JLabel("Student Registration Table");
 		studentTableLabel.setForeground(Color.WHITE);
 		studentTableLabel.setFont(new Font("Tahoma", Font.BOLD | Font.ITALIC, 16));
-		studentTableLabel.setBounds(660, 505, 262, 22);
+		studentTableLabel.setBounds(559, 473, 262, 22);
 		frame.getContentPane().add(studentTableLabel);
 
 		// Register Button ActionListener

@@ -107,6 +107,8 @@ INSERT into schoolnamelabel (elementaryschoolname) VALUES ('MSSE-670 Elementary 
 ```
 Minimum JRE requirement is Version 1.8
 
+MySQL Connector J 8.0.27 is used to connect to MySQL Database. File Name (mysql-connector-java-8.0.27.jar).
+
 ```
 **Configuration**
 
