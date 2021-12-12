@@ -9,7 +9,7 @@ MSSE 670: Object Oriented Software Construction
 
 Professor: Ishmael Thomas
 
-“Elementary School Registration” application is used to enroll students in elementary school grades (Kindergarten, First Grade, Second Grade, Third Grade, Fourth Grade and Fifth Grade). School Registrar will enter information in Registration Form based on paper application received from Students. School Registrar will assign one class section (A or B) to students from Grade Information Table. Each class section has specific teacher assigned and teacher information will be displayed in Teacher Information Table. After successful enrollment registration information will be displayed in Student Registration Table. Once student enrollment is successfully done, School Registrar can update the registration or delete the registration. Only one registration application per Student is allowed.
+“Elementary School Registration” application is used to enroll students in elementary school grades (Kindergarten, First Grade, Second Grade, Third Grade, Fourth Grade and Fifth Grade). School Registrar will enter information in Registration Form based on paper application received from Students. School Registrar will assign one class section (A or B) to students from Grade Information Table. Each class section has specific teacher assigned and teacher information will be displayed in Teacher Information Table. After successful enrollment registration information will be displayed in Student Registration Table. Once student enrollment is successfully done, School Registrar can update the registration or delete the registration. Only one registration application per Student is allowed. School Name will display on top of application. 
 
 # Database Setup
 
@@ -107,7 +107,7 @@ INSERT into schoolnamelabel (elementaryschoolname) VALUES ('MSSE-670 Elementary 
 ```
 Minimum JRE requirement is Version 1.8
 
-MySQL Connector J 8.0.27 is used to connect to MySQL Database. File Name (mysql-connector-java-8.0.27.jar).
+MySQL Connector J 8.0.27 is used to connect to MySQL Database. File Name (mysql-connector-java-8.0.27.jar)
 
 ```
 **Configuration**
@@ -115,7 +115,9 @@ MySQL Connector J 8.0.27 is used to connect to MySQL Database. File Name (mysql-
 ```
 "application.properties" file located at com.elementaryschool.config has all services. In case if any service is not required it can be removed from file.
 
-"database.properties" file located at com.elementaryschool.config has database credentials. Currently its connected to cloud database and to run application no database configuration is required. But if local MySQL database is used "database.properties" file credentials are required to be updated accordingly.
+"database.properties" file located at com.elementaryschool.config has database credentials. JAR file sent separately has Cloud Database Credentials and should work without any local database configuration. But if local MySQL database is used "database.properties" file credentials are required to be updated accordingly.
+
+Note: GitHub was sending warning alerts regarding MySQL database URL, so removed it from GitHub repository.
 
 ```
 
