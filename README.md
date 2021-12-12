@@ -115,7 +115,7 @@ MySQL Connector J 8.0.27 is used to connect to MySQL Database. File Name (mysql-
 ```
 "application.properties" file located at com.elementaryschool.config has all services. In case if any service is not required it can be removed from file.
 
-"database.properties" file located at com.elementaryschool.config has database credentials. JAR file sent separately has Cloud Database Credentials and should work without any local database configuration. But if local MySQL database is used "database.properties" file credentials are required to be updated accordingly.
+"database.properties" file located at com.elementaryschool.config has database credentials. JAR file sent separately (Folder Name: executable_jar_file) has Cloud Database Credentials and should work without any local database configuration.But if local MySQL database is used "database.properties" file credentials are required to be updated accordingly.
 
 Note: GitHub was sending warning alerts regarding MySQL database URL, so removed it from GitHub repository.
 
